@@ -1,253 +1,483 @@
-
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0A1628">
+<title>MarineNav Pro — دليل الملاحة البحرية</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-#app{font-family:Arial,sans-serif;background:#0A1628;min-height:100vh;color:#F8FAFF;font-size:16px}
-.hero{background:#0D2744;padding:18px 14px 14px;text-align:center;border-bottom:1px solid #1B4F8A}
-.hero-badge{display:inline-block;background:rgba(240,165,0,0.15);border:1px solid #F0A500;color:#F0A500;padding:4px 14px;border-radius:99px;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:10px}
-.hero h1{font-size:22px;font-weight:700;color:#F8FAFF;line-height:1.3;margin-bottom:6px}
-.hero h1 span{color:#F0A500}
-.hero-desc{font-size:13px;color:rgba(248,250,255,0.65);margin-bottom:14px;line-height:1.5}
-.lang-row{display:flex;justify-content:center;gap:8px;margin-bottom:0}
-.lang-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);padding:9px 18px;border-radius:99px;font-size:14px;font-weight:600;cursor:pointer;min-height:44px}
-.lang-btn.active{background:#F0A500;border-color:#F0A500;color:#0A1628}
-.mod-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:14px}
-.mod-btn{background:#0D2744;border:1px solid #1B4F8A;color:#B0C8E0;padding:14px 10px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;min-height:54px;display:flex;align-items:center;justify-content:center;gap:8px;line-height:1.2;text-align:center}
-.mod-btn.active{background:#1B4F8A;border-color:#2E86C1;color:#fff}
-.mod-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.content{padding:0 14px 24px}
-.sec-title{font-size:16px;font-weight:700;color:#F0A500;margin:16px 0 10px;padding-bottom:6px;border-bottom:1px solid rgba(240,165,0,0.25);display:flex;align-items:center;gap:8px}
-.intro-box{background:#0D2744;border:1px solid #1B4F8A;border-left:3px solid #F0A500;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:14px;line-height:1.65;color:rgba(248,250,255,0.85)}
-.buoy-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.buoy-card{background:#0D2744;border:1px solid #1B4F8A;border-radius:12px;padding:14px 10px;cursor:pointer;text-align:center;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
-.buoy-card.sel{border-color:#F0A500;background:rgba(240,165,0,0.08)}
-.buoy-name{font-size:13px;font-weight:700;line-height:1.3}
-.buoy-tap{font-size:11px;color:rgba(248,250,255,0.45)}
-.detail-box{background:#0D2744;border:1px solid #2E86C1;border-radius:12px;padding:14px;margin-bottom:12px}
-.detail-title{font-size:15px;font-weight:700;margin-bottom:10px}
-.detail-row{margin-bottom:8px}
-.d-label{font-size:11px;color:#FFD166;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
-.d-val{font-size:13px;color:rgba(248,250,255,0.9);line-height:1.5}
-.lights-list{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
-.light-card{background:#0D2744;border:1px solid #1B4F8A;border-radius:12px;padding:14px;cursor:pointer;display:flex;align-items:center;gap:14px}
-.light-card.sel{border-color:#F0A500;background:rgba(240,165,0,0.06)}
-.light-icon{width:50px;height:50px;flex-shrink:0}
-.light-name{font-size:14px;font-weight:700;margin-bottom:3px}
-.light-desc{font-size:12px;color:rgba(248,250,255,0.6)}
-.light-detail{margin-top:10px;padding-top:10px;border-top:1px solid rgba(46,134,193,0.25);font-size:13px;color:rgba(248,250,255,0.85);line-height:1.6}
-.rules-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-.rule-card{background:#0D2744;border:1px solid #1B4F8A;border-radius:12px;padding:14px;cursor:pointer}
-.rule-card.sel{border-color:#F0A500;background:rgba(240,165,0,0.05)}
-.rule-header{display:flex;align-items:center;gap:12px}
-.rule-num{background:#1B4F8A;color:#fff;font-size:13px;font-weight:700;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.rule-title{font-size:15px;font-weight:700;line-height:1.3}
-.rule-sub{font-size:12px;color:rgba(248,250,255,0.55);margin-top:2px}
-.rule-body{margin-top:10px;padding-top:10px;border-top:1px solid rgba(46,134,193,0.2);font-size:13px;color:rgba(248,250,255,0.85);line-height:1.65}
-.quiz-box{background:#0D2744;border:1px solid #1B4F8A;border-radius:12px;padding:16px;margin-bottom:12px}
-.quiz-q{font-size:15px;font-weight:700;margin-bottom:14px;line-height:1.5;color:#F8FAFF}
-.quiz-opts{display:flex;flex-direction:column;gap:8px}
-.qopt{background:rgba(27,79,138,0.35);border:1px solid rgba(46,134,193,0.4);color:rgba(248,250,255,0.9);padding:13px 14px;border-radius:10px;font-size:14px;cursor:pointer;text-align:right;min-height:48px;line-height:1.4}
-.qopt.ok{background:rgba(0,179,65,0.18);border-color:#00B341;color:#a3f5c0}
-.qopt.fail{background:rgba(232,0,29,0.18);border-color:#E8001D;color:#ffb3b3}
-.quiz-fb{margin-top:10px;padding:12px;border-radius:10px;font-size:13px;line-height:1.6;display:none}
-.quiz-fb.show{display:block}
-.quiz-fb.ok{background:rgba(0,179,65,0.12);border:1px solid #00B341;color:#a3f5c0}
-.quiz-fb.fail{background:rgba(232,0,29,0.12);border:1px solid #E8001D;color:#ffb3b3}
-.quiz-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:8px}
-.quiz-prog{font-size:13px;color:rgba(248,250,255,0.55)}
-.score-pill{background:rgba(240,165,0,0.15);border:1px solid #F0A500;color:#F0A500;padding:4px 12px;border-radius:99px;font-size:12px;font-weight:700}
-.next-btn{background:#1B4F8A;border:1px solid #2E86C1;color:#fff;padding:11px 22px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;min-height:46px}
-.finish-screen{background:#0D2744;border:1px solid #1B4F8A;border-radius:12px;padding:24px 16px;text-align:center;margin-bottom:12px}
-.finish-stars{font-size:38px;margin-bottom:10px}
-.finish-score{font-size:28px;font-weight:700;color:#F0A500;margin-bottom:4px}
-.finish-pct{font-size:14px;color:rgba(248,250,255,0.6);margin-bottom:18px}
-.restart-btn{background:#1B4F8A;border:1px solid #2E86C1;color:#fff;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;min-height:50px}
-</style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html,body{width:100%;min-height:100%;overflow-x:hidden;background:#0A1628}
+body{font-family:'Segoe UI',Arial,sans-serif;font-size:16px;color:#F8FAFF;background:#0A1628}
 
-<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden">دليل الملاحة البحرية التفاعلي — IALA وCOLREGs</h2>
+/* ===== HERO ===== */
+.hero{background:linear-gradient(180deg,#0D2744 0%,#0A1F3A 100%);padding:20px 16px 16px;text-align:center;border-bottom:2px solid #1B4F8A;position:relative}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#F0A500,transparent)}
+.badge{display:inline-block;background:rgba(240,165,0,0.14);border:1.5px solid #F0A500;color:#F0A500;padding:5px 16px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:1.5px;margin-bottom:12px}
+.hero h1{font-size:24px;font-weight:700;color:#F8FAFF;line-height:1.3;margin-bottom:6px}
+.hero h1 em{color:#F0A500;font-style:normal}
+.hero-sub{font-size:13px;color:rgba(248,250,255,0.6);line-height:1.55;margin-bottom:16px}
+.lang-row{display:flex;justify-content:center;gap:8px}
+.lb{background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.75);padding:10px 20px;border-radius:99px;font-size:15px;font-weight:600;cursor:pointer;min-height:46px;transition:all 0.18s}
+.lb.on{background:#F0A500;border-color:#F0A500;color:#0A1628}
+
+/* ===== MODULE NAV ===== */
+.modnav{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px 4px}
+.mb{background:#0D2744;border:1.5px solid #1B4F8A;color:#8BB8D8;padding:16px 10px;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;min-height:60px;display:flex;align-items:center;justify-content:center;gap:8px;line-height:1.3;text-align:center;transition:all 0.18s}
+.mb.on{background:#1B4F8A;border-color:#2E86C1;color:#fff}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ===== CONTENT ===== */
+.wrap{padding:4px 16px 80px}
+.stitle{font-size:17px;font-weight:700;color:#F0A500;margin:16px 0 10px;padding-bottom:7px;border-bottom:1.5px solid rgba(240,165,0,0.22)}
+.infobox{background:#0D2744;border:1.5px solid #1B4F8A;border-left:4px solid #F0A500;border-radius:10px;padding:14px 15px;margin-bottom:14px;font-size:14px;line-height:1.7;color:rgba(248,250,255,0.88)}
+
+/* ===== BUOYS ===== */
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.bc{background:#0D2744;border:1.5px solid #1B4F8A;border-radius:14px;padding:16px 10px;cursor:pointer;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:140px;transition:all 0.18s}
+.bc.on{border-color:#F0A500;background:rgba(240,165,0,0.07)}
+.bname{font-size:13px;font-weight:700;line-height:1.35}
+.btap{font-size:11px;color:rgba(248,250,255,0.38)}
+.detbox{background:#0D2744;border:1.5px solid #2E86C1;border-radius:14px;padding:16px;margin-bottom:14px}
+.dtitle{font-size:16px;font-weight:700;margin-bottom:12px}
+.drow{margin-bottom:10px}
+.dlabel{font-size:11px;color:#FFD166;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:3px}
+.dval{font-size:14px;color:rgba(248,250,255,0.9);line-height:1.55}
+
+/* ===== LIGHTS ===== */
+.llist{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.lc{background:#0D2744;border:1.5px solid #1B4F8A;border-radius:14px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all 0.18s}
+.lc.on{border-color:#F0A500;background:rgba(240,165,0,0.05)}
+.lname{font-size:15px;font-weight:700;margin-bottom:4px}
+.ldesc{font-size:13px;color:rgba(248,250,255,0.6)}
+.ldetail{margin-top:12px;padding-top:12px;border-top:1.5px solid rgba(46,134,193,0.2);font-size:14px;color:rgba(248,250,255,0.88);line-height:1.65}
+
+/* ===== COLREGS ===== */
+.rlist{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.rc{background:#0D2744;border:1.5px solid #1B4F8A;border-radius:14px;padding:16px;cursor:pointer;transition:all 0.18s}
+.rc.on{border-color:#F0A500;background:rgba(240,165,0,0.04)}
+.rheader{display:flex;align-items:center;gap:14px}
+.rnum{background:#1B4F8A;color:#fff;font-size:14px;font-weight:700;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rtitle{font-size:15px;font-weight:700;line-height:1.3}
+.rsub{font-size:12px;color:rgba(248,250,255,0.5);margin-top:3px}
+.rbody{margin-top:12px;padding-top:12px;border-top:1.5px solid rgba(46,134,193,0.18);font-size:14px;color:rgba(248,250,255,0.88);line-height:1.7}
+
+/* ===== QUIZ ===== */
+.qbox{background:#0D2744;border:1.5px solid #1B4F8A;border-radius:14px;padding:18px;margin-bottom:12px}
+.qq{font-size:16px;font-weight:700;margin-bottom:16px;color:#F8FAFF;line-height:1.55}
+.qopts{display:flex;flex-direction:column;gap:10px}
+.qo{background:rgba(27,79,138,0.32);border:1.5px solid rgba(46,134,193,0.38);color:rgba(248,250,255,0.92);padding:15px 16px;border-radius:12px;font-size:15px;cursor:pointer;text-align:right;min-height:52px;line-height:1.45;transition:all 0.18s;width:100%}
+.qo.ok{background:rgba(0,179,65,0.16);border-color:#00B341;color:#9cf0bc}
+.qo.fail{background:rgba(232,0,29,0.16);border-color:#E8001D;color:#ffb8b8}
+.qfb{margin-top:12px;padding:14px;border-radius:12px;font-size:14px;line-height:1.65;display:none}
+.qfb.show{display:block}
+.qfb.ok{background:rgba(0,179,65,0.1);border:1.5px solid #00B341;color:#9cf0bc}
+.qfb.fail{background:rgba(232,0,29,0.1);border:1.5px solid #E8001D;color:#ffb8b8}
+.qfoot{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:10px;flex-wrap:wrap}
+.qprog{font-size:14px;color:rgba(248,250,255,0.5)}
+.spill{background:rgba(240,165,0,0.14);border:1.5px solid #F0A500;color:#F0A500;padding:4px 13px;border-radius:99px;font-size:12px;font-weight:700}
+.nbtn{background:#1B4F8A;border:1.5px solid #2E86C1;color:#fff;padding:13px 24px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;min-height:50px}
+.finish{background:#0D2744;border:1.5px solid #1B4F8A;border-radius:14px;padding:30px 16px;text-align:center;margin-bottom:12px}
+.fstars{font-size:44px;margin-bottom:12px}
+.fscore{font-size:30px;font-weight:700;color:#F0A500;margin-bottom:6px}
+.fpct{font-size:15px;color:rgba(248,250,255,0.6);margin-bottom:22px}
+.rbtn{background:#1B4F8A;border:1.5px solid #2E86C1;color:#fff;padding:15px 32px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;min-height:54px}
+</style>
+</head>
+<body>
 
 <div id="app">
   <div class="hero">
-    <div class="hero-badge">MARINE NAV · IALA · COLREGS</div>
-    <h1>دليل الملاحة البحرية <span>التفاعلي</span></h1>
-    <p class="hero-desc" id="hdesc">تعلّم علامات الملاحة وأنوار السفن وقواعد COLREGs</p>
+    <div class="badge">MARINE NAV · IALA · COLREGs</div>
+    <h1>دليل الملاحة البحرية <em>التفاعلي</em></h1>
+    <p class="hero-sub" id="hsub">تعلّم علامات الملاحة وأنوار السفن وقواعد COLREGs</p>
     <div class="lang-row">
-      <button class="lang-btn active" onclick="setLang('ar')">العربية</button>
-      <button class="lang-btn" onclick="setLang('fr')">Français</button>
-      <button class="lang-btn" onclick="setLang('en')">English</button>
+      <button class="lb on" onclick="setL('ar')">العربية</button>
+      <button class="lb" onclick="setL('fr')">Français</button>
+      <button class="lb" onclick="setL('en')">English</button>
     </div>
   </div>
 
-  <div class="mod-nav">
-    <button class="mod-btn active" onclick="setMod('iala')"><span class="mod-dot" style="background:#2E86C1"></span><span id="mn0">علامات IALA</span></button>
-    <button class="mod-btn" onclick="setMod('lights')"><span class="mod-dot" style="background:#F0A500"></span><span id="mn1">أنوار السفن</span></button>
-    <button class="mod-btn" onclick="setMod('colreg')"><span class="mod-dot" style="background:#E8001D"></span><span id="mn2">قواعد COLREGs</span></button>
-    <button class="mod-btn" onclick="setMod('quiz')"><span class="mod-dot" style="background:#00B341"></span><span id="mn3">اختبر نفسك</span></button>
+  <div class="modnav">
+    <button class="mb on" onclick="setM('iala')"><span class="dot" style="background:#2E86C1"></span><span id="mn0">علامات IALA</span></button>
+    <button class="mb" onclick="setM('lights')"><span class="dot" style="background:#F0A500"></span><span id="mn1">أنوار السفن</span></button>
+    <button class="mb" onclick="setM('colreg')"><span class="dot" style="background:#E8001D"></span><span id="mn2">قواعد COLREGs</span></button>
+    <button class="mb" onclick="setM('quiz')"><span class="dot" style="background:#00B341"></span><span id="mn3">اختبر نفسك</span></button>
   </div>
 
-  <div class="content" id="cnt"></div>
+  <div class="wrap" id="cnt"></div>
 </div>
 
 <script>
-const L={
-  ar:{desc:'تعلّم علامات الملاحة وأنوار السفن وقواعد COLREGs',mn:['علامات IALA','أنوار السفن','قواعد COLREGs','اختبر نفسك'],iT:'نظام الإشارات البحرية الدولية',iI:'نظام IALA هو المعيار الدولي الموحد لعلامات الملاحة البحرية. يُقسم إلى منطقتين: A (أوروبا، أفريقيا، آسيا) وB (الأمريكتان، اليابان). اضغط على أي علامة للتفاصيل.',tap:'اضغط للتفاصيل',lT:'أنوار السفن والإشارات',lI:'تحمل كل سفينة أنواراً محددة تمكّن الآخرين من تحديد نوعها واتجاهها. هذه الأنوار إلزامية وفق COLREGs. اضغط على أي ضوء للتفاصيل.',cT:'قواعد COLREGs لمنع التصادم',cI:'اتفاقية الأمم المتحدة 1972 تحدد قواعد الطريق في البحر. تطبق على جميع السفن في المياه الدولية. اضغط على أي قاعدة لقراءتها.',qT:'اختبر معلوماتك البحرية',qI:'8 أسئلة تغطي IALA وأنوار السفن وقواعد COLREGs.',nxt:'السؤال التالي',fin:'إنهاء الاختبار',scr:'النتيجة',rst:'إعادة الاختبار',clr:'اللون',shp:'الشكل',top:'علامة الرأس',lgt:'الضوء',mA:'المعنى (منطقة A)',mB:'المعنى (منطقة B)',use:'الاستخدام'},
-  fr:{desc:'Apprenez le balisage IALA, les feux et les règles COLREG',mn:['Bouées IALA','Feux navire','Règles COLREG','Quiz'],iT:'Système de balisage IALA',iI:'Le système IALA est la norme internationale de balisage. Région A (Europe, Afrique, Asie) et Région B (Amériques, Japon). Appuyez sur une bouée pour les détails.',tap:'Appuyer pour détails',lT:'Feux et signaux des navires',lI:'Chaque navire doit afficher des feux permettant d\'identifier son type et sa direction. Obligatoires selon les COLREG. Appuyez sur un feu pour les détails.',cT:'Règles COLREG — prévention abordages',cI:'Convention ONU 1972 établissant les règles de route en mer. S\'applique à tous les navires dans les eaux internationales. Appuyez sur une règle pour la lire.',qT:'Testez vos connaissances',qI:'8 questions couvrant IALA, feux et règles COLREG.',nxt:'Question suivante',fin:'Terminer',scr:'Score',rst:'Recommencer',clr:'Couleur',shp:'Forme',top:'Voyant de tête',lgt:'Lumière',mA:'Signification (Région A)',mB:'Signification (Région B)',use:'Usage'},
-  en:{desc:'Learn IALA buoys, ship lights and COLREGs interactively',mn:['IALA Buoys','Ship Lights','COLREGs','Quiz'],iT:'IALA Maritime Buoyage System',iI:'IALA is the international standard for maritime buoys. Region A (Europe, Africa, Asia) and Region B (Americas, Japan, Korea). Tap any buoy for details.',tap:'Tap for details',lT:'Ship Lights and Signals',lI:'Every vessel must display specific lights to identify its type and direction. Mandatory under COLREGs. Tap any light for details.',cT:'COLREGs — Collision Regulations',cI:'The 1972 UN Convention establishes rules of the road at sea. Applies to all vessels in international waters. Tap any rule to read it.',qT:'Test Your Maritime Knowledge',qI:'8 questions covering IALA, ship lights, and COLREGs.',nxt:'Next question',fin:'Finish quiz',scr:'Score',rst:'Restart quiz',clr:'Color',shp:'Shape',top:'Top mark',lgt:'Light',mA:'Meaning (Region A)',mB:'Meaning (Region B)',use:'Use'}
+var T={
+  ar:{sub:'تعلّم علامات الملاحة وأنوار السفن وقواعد COLREGs',
+      mn:['علامات IALA','أنوار السفن','قواعد COLREGs','اختبر نفسك'],
+      iT:'نظام الإشارات البحرية الدولية — IALA',
+      iI:'نظام IALA هو المعيار الدولي لعلامات الملاحة. منطقة A (أوروبا، أفريقيا، آسيا) ومنطقة B (الأمريكتان، اليابان). اضغط على أي علامة لعرض تفاصيلها الكاملة.',
+      tap:'اضغط لعرض التفاصيل',
+      lT:'أنوار السفن والإشارات البحرية',
+      lI:'كل سفينة تحمل أنواراً محددة تُعرّف نوعها واتجاهها وحالتها. إلزامية وفق قواعد COLREGs. اضغط على أي ضوء للتفاصيل.',
+      cT:'قواعد COLREGs لمنع التصادم في البحار',
+      cI:'اتفاقية الأمم المتحدة 1972 تُحدّد قواعد الطريق في البحر وتمنع التصادم. تُطبّق على جميع السفن في المياه الدولية. اضغط على أي قاعدة لقراءتها.',
+      qT:'اختبر معلوماتك البحرية',
+      qI:'8 أسئلة تفاعلية تغطي IALA وأنوار السفن وقواعد COLREGs مع شرح مفصل لكل إجابة.',
+      nxt:'السؤال التالي',fin:'إنهاء الاختبار',scr:'النتيجة',rst:'إعادة الاختبار',
+      top:'علامة الرأس',lgt:'الضوء',mA:'المعنى (منطقة A)',mB:'المعنى (منطقة B)',use:'الاستخدام'},
+  fr:{sub:'Apprenez le balisage IALA, les feux et les règles COLREG',
+      mn:['Bouées IALA','Feux navire','Règles COLREG','Quiz'],
+      iT:'Système de balisage IALA',
+      iI:'Le système IALA est la norme internationale de balisage maritime. Région A (Europe, Afrique, Asie) et Région B (Amériques, Japon). Appuyez sur une bouée pour les détails.',
+      tap:'Appuyer pour les détails',
+      lT:'Feux et signaux des navires',
+      lI:'Chaque navire affiche des feux permettant d\'identifier son type et sa direction. Obligatoires selon les COLREG. Appuyez sur un feu pour les détails.',
+      cT:'Règles COLREG — Prévention des abordages',
+      cI:'La Convention ONU 1972 établit les règles de route en mer. S\'applique à tous les navires en eaux internationales. Appuyez sur une règle pour la lire.',
+      qT:'Testez vos connaissances maritimes',
+      qI:'8 questions couvrant IALA, feux de navire et règles COLREG avec explications détaillées.',
+      nxt:'Question suivante',fin:'Terminer',scr:'Score',rst:'Recommencer',
+      top:'Voyant de tête',lgt:'Lumière',mA:'Signification (Région A)',mB:'Signification (Région B)',use:'Usage'},
+  en:{sub:'Learn IALA buoys, ship lights and COLREGs interactively',
+      mn:['IALA Buoys','Ship Lights','COLREGs','Quiz'],
+      iT:'IALA Maritime Buoyage System',
+      iI:'IALA is the international standard for maritime buoys. Region A (Europe, Africa, Asia) and Region B (Americas, Japan, Korea). Tap any buoy to see full details.',
+      tap:'Tap to see details',
+      lT:'Ship Lights and Navigation Signals',
+      lI:'Every vessel must display specific lights to identify its type, direction, and status. Mandatory under COLREGs. Tap any light for full details.',
+      cT:'COLREGs — Collision Regulations at Sea',
+      cI:'The 1972 UN Convention establishes rules of the road at sea to prevent collisions. Applies to all vessels in international waters. Tap any rule to read it.',
+      qT:'Test Your Maritime Knowledge',
+      qI:'8 interactive questions covering IALA, ship lights, and COLREGs with detailed explanations.',
+      nxt:'Next question',fin:'Finish quiz',scr:'Score',rst:'Restart quiz',
+      top:'Top mark',lgt:'Light',mA:'Meaning (Region A)',mB:'Meaning (Region B)',use:'Use'}
 };
 
-const BUOYS=[
-  {id:'port',col:'#E8001D',names:{ar:'علامة الميناء (يسار)',fr:'Bouée bâbord',en:'Port lateral mark'},top:{ar:'أسطوانة حمراء',fr:'Cylindre rouge',en:'Red cylinder'},lgt:{ar:'أحمر – أي إيقاع',fr:'Rouge – tout rythme',en:'Red – any rhythm'},mA:{ar:'الجانب الأيسر عند دخول الميناء — عبر من اليمين',fr:'Côté bâbord à l\'entrée — passer à tribord',en:'Port side when entering — keep to starboard'},mB:{ar:'الجانب الأيمن عند دخول الميناء',fr:'Côté tribord à l\'entrée',en:'Starboard side when entering'},use:{ar:'تحدد الحافة الأيسر من قناة الملاحة',fr:'Délimite le côté bâbord du chenal',en:'Marks port side of navigable channel'}},
-  {id:'stbd',col:'#00B341',names:{ar:'علامة اليمين (يمين)',fr:'Bouée tribord',en:'Starboard lateral mark'},top:{ar:'مخروط أخضر',fr:'Cône vert',en:'Green cone'},lgt:{ar:'أخضر – أي إيقاع',fr:'Vert – tout rythme',en:'Green – any rhythm'},mA:{ar:'الجانب الأيمن عند دخول الميناء',fr:'Côté tribord à l\'entrée',en:'Starboard side when entering'},mB:{ar:'الجانب الأيسر عند دخول الميناء',fr:'Côté bâbord à l\'entrée',en:'Port side when entering'},use:{ar:'تحدد الحافة الأيمن من قناة الملاحة',fr:'Délimite le côté tribord du chenal',en:'Marks starboard side of navigable channel'}},
-  {id:'north',col:'#FFD166',names:{ar:'علامة الشمال الكاردينالية',fr:'Bouée cardinale nord',en:'North cardinal mark'},top:{ar:'مخروطان رأساً للأعلى ▲▲',fr:'Deux cônes pointes en haut ▲▲',en:'Two cones points up ▲▲'},lgt:{ar:'أبيض – Q أو VQ (سريع)',fr:'Blanc – Q ou VQ',en:'White – Q or VQ'},mA:{ar:'مياه آمنة شمال العلامة — عبر من الشمال',fr:'Eaux sûres au nord — passer au nord',en:'Safe water to the north — pass to the north'},mB:{ar:'مياه آمنة شمال العلامة',fr:'Eaux sûres au nord',en:'Safe water to the north'},use:{ar:'تشير إلى المياه الآمنة شمال الخطر',fr:'Indique des eaux sûres au nord',en:'Indicates safe water to the north of the danger'}},
-  {id:'south',col:'#FFD166',names:{ar:'علامة الجنوب الكاردينالية',fr:'Bouée cardinale sud',en:'South cardinal mark'},top:{ar:'مخروطان رأساً للأسفل ▼▼',fr:'Deux cônes pointes en bas ▼▼',en:'Two cones points down ▼▼'},lgt:{ar:'أبيض – VQ(6)+LFl أو Q(6)+LFl',fr:'Blanc – VQ(6)+LFl',en:'White – VQ(6)+LFl or Q(6)+LFl'},mA:{ar:'مياه آمنة جنوب العلامة — عبر من الجنوب',fr:'Eaux sûres au sud — passer au sud',en:'Safe water to the south — pass to the south'},mB:{ar:'مياه آمنة جنوب العلامة',fr:'Eaux sûres au sud',en:'Safe water to the south'},use:{ar:'تشير إلى المياه الآمنة جنوب الخطر',fr:'Indique des eaux sûres au sud',en:'Indicates safe water to the south of the danger'}},
-  {id:'east',col:'#FFD166',names:{ar:'علامة الشرق الكاردينالية',fr:'Bouée cardinale est',en:'East cardinal mark'},top:{ar:'مخروطان ظهراً لظهر ◆',fr:'Deux cônes base à base ◆',en:'Two cones base to base ◆'},lgt:{ar:'أبيض – VQ(3) أو Q(3)',fr:'Blanc – VQ(3) ou Q(3)',en:'White – VQ(3) or Q(3)'},mA:{ar:'مياه آمنة شرق العلامة — عبر من الشرق',fr:'Eaux sûres à l\'est — passer à l\'est',en:'Safe water to the east — pass to the east'},mB:{ar:'مياه آمنة شرق العلامة',fr:'Eaux sûres à l\'est',en:'Safe water to the east'},use:{ar:'تشير إلى المياه الآمنة شرق الخطر',fr:'Indique des eaux sûres à l\'est',en:'Indicates safe water to the east of the danger'}},
-  {id:'west',col:'#FFD166',names:{ar:'علامة الغرب الكاردينالية',fr:'Bouée cardinale ouest',en:'West cardinal mark'},top:{ar:'مخروطان وجهاً لوجه ◇',fr:'Deux cônes pointes face ◇',en:'Two cones points together ◇'},lgt:{ar:'أبيض – VQ(9) أو Q(9)',fr:'Blanc – VQ(9) ou Q(9)',en:'White – VQ(9) or Q(9)'},mA:{ar:'مياه آمنة غرب العلامة — عبر من الغرب',fr:'Eaux sûres à l\'ouest — passer à l\'ouest',en:'Safe water to the west — pass to the west'},mB:{ar:'مياه آمنة غرب العلامة',fr:'Eaux sûres à l\'ouest',en:'Safe water to the west'},use:{ar:'تشير إلى المياه الآمنة غرب الخطر',fr:'Indique des eaux sûres à l\'ouest',en:'Indicates safe water to the west of the danger'}},
-  {id:'danger',col:'#E8001D',names:{ar:'علامة الخطر المعزول',fr:'Bouée danger isolé',en:'Isolated danger mark'},top:{ar:'كرتان سوداوان ●●',fr:'Deux sphères noires ●●',en:'Two black spheres ●●'},lgt:{ar:'أبيض – Fl(2) ومضتان',fr:'Blanc – Fl(2)',en:'White – Fl(2)'},mA:{ar:'خطر معزول — مياه آمنة من جميع الجهات',fr:'Danger isolé entouré d\'eaux navigables',en:'Isolated danger with safe water all around'},mB:{ar:'خطر معزول — مياه آمنة من جميع الجهات',fr:'Danger isolé entouré d\'eaux navigables',en:'Isolated danger with safe water all around'},use:{ar:'توضع فوق الخطر أو بجانبه مباشرة',fr:'Placée sur ou près du danger',en:'Placed on or near the danger itself'}},
-  {id:'safe',col:'#fff',names:{ar:'علامة المياه الآمنة',fr:'Bouée eau saine',en:'Safe water mark'},top:{ar:'كرة حمراء ●',fr:'Sphère rouge ●',en:'Red sphere ●'},lgt:{ar:'أبيض – Iso أو Oc أو LFl أو Mo(A)',fr:'Blanc – Iso/Oc/LFl/Mo(A)',en:'White – Iso/Oc/LFl or Mo(A)'},mA:{ar:'مياه صالحة للملاحة من جميع الاتجاهات',fr:'Eaux navigables de tous les côtés',en:'Navigable water on all sides'},mB:{ar:'مياه صالحة للملاحة من جميع الاتجاهات',fr:'Eaux navigables de tous les côtés',en:'Navigable water on all sides'},use:{ar:'تحدد منتصف القناة أو نقطة الدخول للميناء',fr:'Marque le milieu du chenal ou l\'atterrissage',en:'Marks mid-channel or harbor approach point'}},
-  {id:'special',col:'#F5C518',names:{ar:'العلامة الخاصة',fr:'Bouée spéciale',en:'Special mark'},top:{ar:'علامة X صفراء ✕',fr:'Marque X jaune ✕',en:'Yellow X mark ✕'},lgt:{ar:'أصفر – أي إيقاع',fr:'Jaune – tout rythme',en:'Yellow – any rhythm'},mA:{ar:'منطقة خاصة: رياضات، أنابيب، عسكرية...',fr:'Zone spéciale : sports, pipelines, militaire…',en:'Special area: sports, pipelines, military…'},mB:{ar:'منطقة خاصة: رياضات، أنابيب، عسكرية...',fr:'Zone spéciale : sports, pipelines, militaire…',en:'Special area: sports, pipelines, military…'},use:{ar:'تشير لمناطق خاصة غير مغطاة بعلامات أخرى',fr:'Indique des zones spéciales',en:'Indicates special areas not covered by other marks'}}
+var BUOYS=[
+  {id:'port',col:'#E8001D',
+   names:{ar:'علامة الميناء — الجانب الأيسر',fr:'Bouée bâbord (port)',en:'Port lateral mark'},
+   top:{ar:'أسطوانة حمراء',fr:'Cylindre rouge',en:'Red cylinder'},
+   lgt:{ar:'أحمر – أي إيقاع',fr:'Rouge – tout rythme',en:'Red – any rhythm'},
+   mA:{ar:'الجانب الأيسر عند الدخول للميناء. عبر من اليمين (يمين السفينة)',fr:'Côté bâbord à l\'entrée. Passer à tribord.',en:'Port side when entering. Keep to starboard.'},
+   mB:{ar:'الجانب الأيمن عند الدخول للميناء. عبر من اليسار',fr:'Côté tribord à l\'entrée. Passer à bâbord.',en:'Starboard side when entering. Keep to port.'},
+   use:{ar:'تُحدّد الحافة الأيسر من قناة الملاحة الآمنة',fr:'Délimite le bord bâbord du chenal navigable',en:'Marks the port side of the navigable channel'}},
+  {id:'stbd',col:'#00B341',
+   names:{ar:'علامة اليمين — الجانب الأيمن',fr:'Bouée tribord (starboard)',en:'Starboard lateral mark'},
+   top:{ar:'مخروط أخضر',fr:'Cône vert',en:'Green cone'},
+   lgt:{ar:'أخضر – أي إيقاع',fr:'Vert – tout rythme',en:'Green – any rhythm'},
+   mA:{ar:'الجانب الأيمن عند الدخول للميناء. عبر من اليسار',fr:'Côté tribord à l\'entrée. Passer à bâbord.',en:'Starboard side when entering. Keep to port.'},
+   mB:{ar:'الجانب الأيسر عند الدخول للميناء. عبر من اليمين',fr:'Côté bâbord à l\'entrée. Passer à tribord.',en:'Port side when entering. Keep to starboard.'},
+   use:{ar:'تُحدّد الحافة الأيمن من قناة الملاحة الآمنة',fr:'Délimite le bord tribord du chenal navigable',en:'Marks the starboard side of the navigable channel'}},
+  {id:'north',col:'#FFD166',
+   names:{ar:'علامة الشمال الكاردينالية',fr:'Bouée cardinale nord',en:'North cardinal mark'},
+   top:{ar:'مخروطان رأساً للأعلى ▲▲',fr:'Deux cônes pointes en haut ▲▲',en:'Two cones points up ▲▲'},
+   lgt:{ar:'أبيض — Q أو VQ (وميض سريع)',fr:'Blanc — Q ou VQ (scintillements rapides)',en:'White — Q or VQ (quick flash)'},
+   mA:{ar:'المياه الآمنة تقع شمال هذه العلامة — عبر من الشمال',fr:'Eaux sûres au nord — passer au nord',en:'Safe water lies to the north — pass to the north'},
+   mB:{ar:'المياه الآمنة تقع شمال هذه العلامة — عبر من الشمال',fr:'Eaux sûres au nord — passer au nord',en:'Safe water lies to the north — pass to the north'},
+   use:{ar:'جسمها أصفر أعلى وأسود أسفل. توضع شمال الخطر',fr:'Corps jaune sur noir. Placée au nord du danger',en:'Body yellow over black. Placed north of the hazard'}},
+  {id:'south',col:'#FFD166',
+   names:{ar:'علامة الجنوب الكاردينالية',fr:'Bouée cardinale sud',en:'South cardinal mark'},
+   top:{ar:'مخروطان رأساً للأسفل ▼▼',fr:'Deux cônes pointes en bas ▼▼',en:'Two cones points down ▼▼'},
+   lgt:{ar:'أبيض — VQ(6)+LFl أو Q(6)+LFl',fr:'Blanc — VQ(6)+LFl',en:'White — VQ(6)+LFl or Q(6)+LFl'},
+   mA:{ar:'المياه الآمنة تقع جنوب هذه العلامة — عبر من الجنوب',fr:'Eaux sûres au sud — passer au sud',en:'Safe water lies to the south — pass to the south'},
+   mB:{ar:'المياه الآمنة تقع جنوب هذه العلامة — عبر من الجنوب',fr:'Eaux sûres au sud — passer au sud',en:'Safe water lies to the south — pass to the south'},
+   use:{ar:'جسمها أسود أعلى وأصفر أسفل. توضع جنوب الخطر',fr:'Corps noir sur jaune. Placée au sud du danger',en:'Body black over yellow. Placed south of the hazard'}},
+  {id:'east',col:'#FFD166',
+   names:{ar:'علامة الشرق الكاردينالية',fr:'Bouée cardinale est',en:'East cardinal mark'},
+   top:{ar:'مخروطان ظهراً لظهر ◆',fr:'Deux cônes base à base ◆',en:'Two cones base to base ◆'},
+   lgt:{ar:'أبيض — VQ(3) أو Q(3)',fr:'Blanc — VQ(3) ou Q(3)',en:'White — VQ(3) or Q(3)'},
+   mA:{ar:'المياه الآمنة تقع شرق هذه العلامة — عبر من الشرق',fr:'Eaux sûres à l\'est — passer à l\'est',en:'Safe water lies to the east — pass to the east'},
+   mB:{ar:'المياه الآمنة تقع شرق هذه العلامة — عبر من الشرق',fr:'Eaux sûres à l\'est — passer à l\'est',en:'Safe water lies to the east — pass to the east'},
+   use:{ar:'جسمها أصفر وأسود وأصفر. توضع شرق الخطر',fr:'Corps jaune/noir/jaune. Placée à l\'est du danger',en:'Body yellow/black/yellow. Placed east of the hazard'}},
+  {id:'west',col:'#FFD166',
+   names:{ar:'علامة الغرب الكاردينالية',fr:'Bouée cardinale ouest',en:'West cardinal mark'},
+   top:{ar:'مخروطان وجهاً لوجه ◇',fr:'Deux cônes pointes face ◇',en:'Two cones points together ◇'},
+   lgt:{ar:'أبيض — VQ(9) أو Q(9)',fr:'Blanc — VQ(9) ou Q(9)',en:'White — VQ(9) or Q(9)'},
+   mA:{ar:'المياه الآمنة تقع غرب هذه العلامة — عبر من الغرب',fr:'Eaux sûres à l\'ouest — passer à l\'ouest',en:'Safe water lies to the west — pass to the west'},
+   mB:{ar:'المياه الآمنة تقع غرب هذه العلامة — عبر من الغرب',fr:'Eaux sûres à l\'ouest — passer à l\'ouest',en:'Safe water lies to the west — pass to the west'},
+   use:{ar:'جسمها أسود وأصفر وأسود. توضع غرب الخطر',fr:'Corps noir/jaune/noir. Placée à l\'ouest du danger',en:'Body black/yellow/black. Placed west of the hazard'}},
+  {id:'danger',col:'#E8001D',
+   names:{ar:'علامة الخطر المعزول',fr:'Bouée danger isolé',en:'Isolated danger mark'},
+   top:{ar:'كرتان سوداوان ●●',fr:'Deux sphères noires ●●',en:'Two black spheres ●●'},
+   lgt:{ar:'أبيض — Fl(2) ومضتان',fr:'Blanc — Fl(2)',en:'White — Fl(2) two flashes'},
+   mA:{ar:'خطر معزول محاط بمياه صالحة للملاحة من جميع الجهات',fr:'Danger isolé entouré d\'eaux navigables',en:'Isolated danger with safe navigable water all around'},
+   mB:{ar:'خطر معزول محاط بمياه صالحة للملاحة من جميع الجهات',fr:'Danger isolé entouré d\'eaux navigables',en:'Isolated danger with safe navigable water all around'},
+   use:{ar:'توضع مباشرة فوق الخطر أو بجانبه. جسمها أحمر وأسود بالتناوب',fr:'Placée sur ou près du danger. Corps rouge/noir alternés',en:'Placed on or near the danger. Body red/black bands'}},
+  {id:'safe',col:'#FFFFFF',
+   names:{ar:'علامة المياه الآمنة',fr:'Bouée eau saine',en:'Safe water mark'},
+   top:{ar:'كرة حمراء ●',fr:'Sphère rouge ●',en:'Red sphere ●'},
+   lgt:{ar:'أبيض — Iso أو Oc أو LFl أو Mo(A)',fr:'Blanc — Iso/Oc/LFl/Mo(A)',en:'White — Iso/Oc/LFl or Mo(A)'},
+   mA:{ar:'مياه صالحة للملاحة من جميع الاتجاهات',fr:'Eaux navigables de tous les côtés',en:'Safe navigable water on all sides'},
+   mB:{ar:'مياه صالحة للملاحة من جميع الاتجاهات',fr:'Eaux navigables de tous les côtés',en:'Safe navigable water on all sides'},
+   use:{ar:'خطوط رأسية حمراء وبيضاء. لتحديد منتصف القناة أو نقطة الدخول',fr:'Rayures verticales rouge/blanc. Milieu du chenal ou atterrissage',en:'Red and white vertical stripes. Marks mid-channel or landfall'}},
+  {id:'special',col:'#F5C518',
+   names:{ar:'العلامة الخاصة',fr:'Bouée spéciale',en:'Special mark'},
+   top:{ar:'علامة X صفراء ✕',fr:'Marque X jaune ✕',en:'Yellow X mark ✕'},
+   lgt:{ar:'أصفر — أي إيقاع',fr:'Jaune — tout rythme',en:'Yellow — any rhythm'},
+   mA:{ar:'منطقة ذات غرض خاص: رياضات مائية، خطوط أنابيب، مناطق عسكرية...',fr:'Zone à usage spécial : sports, pipelines, zones militaires…',en:'Special purpose area: water sports, pipelines, military zones…'},
+   mB:{ar:'منطقة ذات غرض خاص: رياضات مائية، خطوط أنابيب، مناطق عسكرية...',fr:'Zone à usage spécial : sports, pipelines, zones militaires…',en:'Special purpose area: water sports, pipelines, military zones…'},
+   use:{ar:'صفراء كاملة. تشير لمناطق غير مغطاة بالعلامات الأخرى',fr:'Jaune uniforme. Zones non couvertes par d\'autres marques',en:'All yellow. Indicates areas not covered by other marks'}}
 ];
 
-const LIGHTS=[
-  {id:'mast',col:'#ffffff',arc:225,aS:-22.5,names:{ar:'ضوء الصاري',fr:'Feu de tête de mât',en:'Masthead light'},desc:{ar:'أبيض – 225°',fr:'Blanc – 225°',en:'White – 225°'},detail:{ar:'مثبت على خط وسط السفينة. يضيء من الأمام بزاوية 225°. إلزامي على جميع السفن الآلية أثناء الإبحار.',fr:'Monté sur l\'axe du navire. Éclaire sur 225° vers l\'avant. Obligatoire sur tous les navires à propulsion.',en:'Mounted on vessel centerline. Illuminates 225° forward. Mandatory on all power-driven vessels underway.'}},
-  {id:'port',col:'#E8001D',arc:112.5,aS:180,names:{ar:'ضوء الجانب الأيسر (أحمر)',fr:'Feu bâbord (rouge)',en:'Port light (red)'},desc:{ar:'أحمر – 112.5° (يسار)',fr:'Rouge – 112,5° (bâbord)',en:'Red – 112.5° (port side)'},detail:{ar:'مثبت على الجانب الأيسر. يضيء 112.5° للأمام. يرى من الأمام وحتى 22.5° خلف الجانب.',fr:'Monté à bâbord. Éclaire 112,5° vers l\'avant. Visible de face jusqu\'à 22,5° en arrière du travers.',en:'Mounted on port side. Illuminates 112.5° forward. Visible from ahead to 22.5° abaft the beam.'}},
-  {id:'stbd',col:'#00B341',arc:112.5,aS:-112.5,names:{ar:'ضوء الجانب الأيمن (أخضر)',fr:'Feu tribord (vert)',en:'Starboard light (green)'},desc:{ar:'أخضر – 112.5° (يمين)',fr:'Vert – 112,5° (tribord)',en:'Green – 112.5° (starboard)'},detail:{ar:'مثبت على الجانب الأيمن. يضيء 112.5° للأمام. قاعدة سهلة: اليمين أخضر، اليسار أحمر.',fr:'Monté à tribord. Éclaire 112,5° vers l\'avant. Règle : vert = tribord, rouge = bâbord.',en:'Mounted on starboard side. Illuminates 112.5° forward. Easy rule: green = right, red = left.'}},
-  {id:'stern',col:'#ffffff',arc:135,aS:112.5,names:{ar:'ضوء المؤخرة',fr:'Feu de poupe',en:'Stern light'},desc:{ar:'أبيض – 135° (خلف)',fr:'Blanc – 135° (arrière)',en:'White – 135° (aft)'},detail:{ar:'مثبت في مؤخرة السفينة. يضيء 135° للخلف. يشير للسفن الأخرى أن هذه السفينة تتجه بعيداً.',fr:'Monté à la poupe. Éclaire 135° vers l\'arrière. Indique que le navire s\'éloigne.',en:'Mounted at the stern. Illuminates 135° aft arc. Signals that the vessel is moving away from you.'}},
-  {id:'anchor',col:'#ffffff',arc:360,aS:0,names:{ar:'ضوء الرسو',fr:'Feu de mouillage',en:'Anchor light'},desc:{ar:'أبيض – 360° (كامل)',fr:'Blanc – 360° (tout-tour)',en:'White – 360° (all-round)'},detail:{ar:'ضوء أبيض يُرى من جميع الاتجاهات 360°. يُستخدم عند إرساء السفينة ليلاً. يُركب في المقدمة.',fr:'Feu blanc visible à 360°. Utilisé quand le navire est à l\'ancre la nuit. Placé à l\'avant.',en:'White all-round light visible 360°. Used when vessel is at anchor at night. Placed at the bow.'}},
-  {id:'nuc',col:'#E8001D',arc:360,aS:0,names:{ar:'السفينة عاجزة عن المناورة',fr:'Navire hors de contrôle',en:'Not under command'},desc:{ar:'أحمر+أحمر – 360° (رأسياً)',fr:'Rouge+Rouge – 360° (vertical)',en:'Red+Red – 360° (vertical pair)'},detail:{ar:'كرتان حمراوان رأسياً تعنيان أن السفينة عاجزة عن المناورة بسبب عطل. جميع السفن الأخرى يجب أن تتجنبها.',fr:'Deux feux rouges verticaux : navire incapable de manœuvrer (panne). Tous les autres navires doivent l\'éviter.',en:'Two red lights in vertical line: vessel cannot maneuver due to breakdown. All other vessels must keep clear.'}}
+var LIGHTS=[
+  {id:'mast',col:'#FFFFFF',arc:225,aS:-22.5,
+   names:{ar:'ضوء الصاري (المقدمة)',fr:'Feu de tête de mât',en:'Masthead light'},
+   desc:{ar:'أبيض — 225°',fr:'Blanc — 225°',en:'White — 225°'},
+   detail:{ar:'مثبت على خط وسط السفينة. يضيء من الأمام بزاوية 225°. إلزامي على جميع السفن الآلية أثناء الإبحار. يُرى من مسافة 6 أميال بحرية.',fr:'Monté sur l\'axe du navire. Éclaire vers l\'avant sur 225°. Obligatoire sur tout navire à propulsion mécanique en route. Visible à 6 milles marins.',en:'Mounted on the centerline. Illuminates 225° forward arc. Mandatory on all power-driven vessels underway. Visible at 6 nautical miles.'}},
+  {id:'port',col:'#E8001D',arc:112.5,aS:180,
+   names:{ar:'ضوء الجانب الأيسر (أحمر)',fr:'Feu bâbord (rouge)',en:'Port light (red)'},
+   desc:{ar:'أحمر — 112.5° (يسار)',fr:'Rouge — 112,5° (bâbord)',en:'Red — 112.5° (port side)'},
+   detail:{ar:'مثبت على الجانب الأيسر للسفينة. يضيء 112.5° للأمام حتى 22.5° خلف الجانب. قاعدة سهلة: "اليسار أحمر". مرئي من مسافة 2 ميل.',fr:'Monté à bâbord. Éclaire 112,5° vers l\'avant jusqu\'à 22,5° en arrière du travers. Règle: "bâbord = rouge". Visible à 2 milles.',en:'Mounted on port (left) side. Illuminates 112.5° forward. Simple rule: "port = red". Visible at 2 nautical miles.'}},
+  {id:'stbd',col:'#00B341',arc:112.5,aS:-112.5,
+   names:{ar:'ضوء الجانب الأيمن (أخضر)',fr:'Feu tribord (vert)',en:'Starboard light (green)'},
+   desc:{ar:'أخضر — 112.5° (يمين)',fr:'Vert — 112,5° (tribord)',en:'Green — 112.5° (starboard)'},
+   detail:{ar:'مثبت على الجانب الأيمن للسفينة. يضيء 112.5° للأمام. قاعدة سهلة: "اليمين أخضر". مرئي من مسافة 2 ميل.',fr:'Monté à tribord. Éclaire 112,5° vers l\'avant. Règle: "tribord = vert". Visible à 2 milles.',en:'Mounted on starboard (right) side. Illuminates 112.5° forward. Simple rule: "starboard = green". Visible at 2 nautical miles.'}},
+  {id:'stern',col:'#FFFFFF',arc:135,aS:112.5,
+   names:{ar:'ضوء المؤخرة',fr:'Feu de poupe',en:'Stern light'},
+   desc:{ar:'أبيض — 135° (خلف)',fr:'Blanc — 135° (arrière)',en:'White — 135° (aft)'},
+   detail:{ar:'مثبت في مؤخرة السفينة. يضيء 135° للخلف. يُخبر السفن الأخرى أنك تبتعد عنها. مرئي من مسافة 2 ميل.',fr:'Monté à la poupe. Éclaire 135° vers l\'arrière. Indique que le navire s\'éloigne. Visible à 2 milles.',en:'Mounted at the stern. Illuminates 135° aft. Tells other vessels you are moving away. Visible at 2 nautical miles.'}},
+  {id:'anchor',col:'#FFFFFF',arc:360,aS:0,
+   names:{ar:'ضوء الرسو',fr:'Feu de mouillage',en:'Anchor light'},
+   desc:{ar:'أبيض — 360° (كامل الاتجاهات)',fr:'Blanc — 360° (tout-tour)',en:'White — 360° (all-round)'},
+   detail:{ar:'ضوء أبيض يُرى من جميع الاتجاهات. يُستخدم عند إرساء السفينة ليلاً. للسفن أقل من 50م: ضوء واحد في المقدمة. للأكبر: ضوءان أمامي وخلفي.',fr:'Feu blanc tout-tour. Utilisé quand le navire est à l\'ancre la nuit. Navires <50m: un feu à l\'avant. Plus grands: deux feux (avant et poupe).',en:'All-round white light. Used when vessel is at anchor at night. Vessels <50m: one light at bow. Larger: two lights (bow and stern).'}},
+  {id:'nuc',col:'#E8001D',arc:360,aS:0,
+   names:{ar:'سفينة عاجزة عن المناورة',fr:'Navire hors de contrôle (NUC)',en:'Not under command (NUC)'},
+   desc:{ar:'أحمر+أحمر — 360° (رأسياً)',fr:'Rouge+Rouge — 360° (vertical)',en:'Red+Red — 360° (vertical pair)'},
+   detail:{ar:'كرتان حمراوان رأسياً تعنيان: السفينة عاجزة عن المناورة بسبب عطل. جميع السفن الأخرى يجب أن تعطيها الأولوية وتتجنبها.',fr:'Deux feux rouges verticaux = navire incapable de manœuvrer (panne moteur/gouvernail). Tous les autres navires doivent lui céder le passage.',en:'Two red lights in vertical line = vessel cannot maneuver due to breakdown. All other vessels must give way and keep clear.'}}
 ];
 
-const RULES=[
-  {num:5,title:{ar:'الرقابة والمراقبة',fr:'Veille',en:'Look-out'},sub:{ar:'رقابة دائمة بكل الوسائل',fr:'Surveillance permanente',en:'Constant watch by all means'},body:{ar:'يجب على كل سفينة في جميع الأوقات الحفاظ على رقابة مناسبة بالبصر والسمع وبجميع الوسائل المتاحة لتقييم خطر التصادم بشكل كامل.',fr:'Tout navire doit en permanence assurer une veille visuelle et auditive appropriée, en utilisant tous les moyens disponibles afin d\'apprécier pleinement le risque d\'abordage.',en:'Every vessel shall at all times maintain a proper look-out by sight and hearing as well as by all available means to make a full appraisal of the situation and risk of collision.'}},
-  {num:8,title:{ar:'إجراء تجنب التصادم',fr:'Manœuvre pour éviter l\'abordage',en:'Action to avoid collision'},sub:{ar:'مناورات واسعة وحاسمة',fr:'Manœuvres amples et décisives',en:'Bold and timely action'},body:{ar:'يجب أن تكون المناورات الرامية لتجنب التصادم كبيرة وواسعة وواضحة. يُمنع اللجوء لسلسلة من التغييرات الصغيرة. يجب تغيير المسار والسرعة بشكل مبكر وكافٍ.',fr:'Toute manœuvre pour éviter un abordage doit être ample et clairement visible. Éviter les petites corrections successives. Changer de cap ou de vitesse tôt et franchement.',en:'Any action to avoid collision shall be large enough to be readily apparent. Avoid a succession of small alterations. Alter course or speed early, positively, and with sufficient margin.'}},
-  {num:13,title:{ar:'قاعدة اللحاق',fr:'Dépassement',en:'Overtaking'},sub:{ar:'اللاحق يتنازل دائماً',fr:'Le dépassant cède toujours',en:'Overtaking vessel always gives way'},body:{ar:'السفينة اللاحقة ملزمة دائماً بالابتعاد عن السفينة المتقدمة. تكون السفينة لاحقة إذا اقتربت من زاوية تزيد عن 22.5° خلف الجانب من أي اتجاه.',fr:'Le navire qui dépasse est toujours tenu de s\'écarter du navire dépassé. Un navire est en train de dépasser s\'il approche sous un angle de plus de 22,5° en arrière du travers.',en:'The overtaking vessel shall always keep clear of the vessel being overtaken. A vessel is overtaking when approaching from a direction more than 22.5° abaft the other vessel\'s beam.'}},
-  {num:14,title:{ar:'الاتجاه المعاكس — وجهاً لوجه',fr:'Route opposée — face à face',en:'Head-on situation'},sub:{ar:'كلاهما يعطف يميناً',fr:'Les deux virent à tribord',en:'Both alter to starboard'},body:{ar:'عند تقابل سفينتين وجهاً لوجه مع خطر التصادم، يجب على كل منهما الانعطاف يميناً لتمر من جانب يسار الأخرى. قاعدة "يسار يمر بيسار".',fr:'Quand deux navires se font face avec risque de collision, chacun doit virer à tribord pour se croiser bâbord à bâbord. Règle du "bâbord à bâbord".',en:'When two power-driven vessels are meeting head-on with risk of collision, each shall alter course to starboard so as to pass on the port side of the other. "Port-to-port" rule.'}},
-  {num:15,title:{ar:'التقاطع — من يتنازل؟',fr:'Croisement — qui cède?',en:'Crossing — who gives way?'},sub:{ar:'السفينة اليمنى تستمر',fr:'Navire à tribord prioritaire',en:'Starboard vessel stands on'},body:{ar:'عند تقاطع مسارات سفينتين مع خطر التصادم، السفينة التي ترى الأخرى على يمينها يجب أن تتنازل. السفينة التي ترى الأخرى على يسارها تستمر في مسارها.',fr:'En croisement avec risque de collision, le navire qui a l\'autre sur son tribord doit céder le passage. Le navire qui voit l\'autre sur bâbord maintient sa route.',en:'In a crossing situation, the vessel which has the other on its starboard side shall give way. The vessel with the other to port shall maintain course and speed.'}},
-  {num:16,title:{ar:'إجراء السفينة المتنازلة',fr:'Action du navire qui cède',en:'Give-way vessel action'},sub:{ar:'تتحرك أولاً وبشكل واضح',fr:'Agir tôt et franchement',en:'Act early, boldly, and clearly'},body:{ar:'كل سفينة ملزمة بالتنازل يجب أن تتخذ إجراءً مبكراً وحاسماً للابتعاد بما يكفي. يجب تجنب عبور أمام السفينة الأخرى إذا أمكن.',fr:'Tout navire tenu de céder doit prendre une manœuvre précoce et décisive pour s\'écarter suffisamment. Éviter autant que possible de passer devant l\'autre navire.',en:'Every vessel required to keep clear shall take early and substantial action to keep well clear. Shall avoid crossing ahead of the other vessel if possible.'}},
-  {num:17,title:{ar:'إجراء السفينة ذات الحق',fr:'Action du navire privilégié',en:'Stand-on vessel action'},sub:{ar:'تحافظ على مسارها وسرعتها',fr:'Maintenir cap et vitesse',en:'Maintain course and speed'},body:{ar:'السفينة ذات الحق تحافظ على مسارها وسرعتها. يجوز لها التحرك إذا تبين أن السفينة الملزمة لم تتخذ الإجراء المناسب في الوقت المناسب.',fr:'Le navire privilégié doit maintenir son cap et sa vitesse. Il peut manœuvrer dès qu\'il est clair que le navire qui doit céder n\'agit pas de façon appropriée.',en:'The stand-on vessel shall maintain its course and speed. May take action when it becomes apparent the give-way vessel is not taking appropriate action.'}},
-  {num:19,title:{ar:'الرؤية المحدودة — الضباب',fr:'Visibilité réduite — brouillard',en:'Restricted visibility — fog'},sub:{ar:'سرعة آمنة وتحذيرات صوتية',fr:'Vitesse sûre, signaux sonores',en:'Safe speed and sound signals'},body:{ar:'في ظروف الرؤية المحدودة، كل سفينة تسير بسرعة آمنة مناسبة للظروف. على السفن الآلية أن تكون جاهزة للتوقف في نصف مسافة الرؤية. إصدار إشارات صوتية كل دقيقتين.',fr:'En visibilité réduite, vitesse de sécurité adaptée. Les navires à propulsion doivent pouvoir stopper en moitié de la distance visible. Émettre des signaux sonores toutes les 2 minutes.',en:'In restricted visibility, proceed at safe speed adapted to conditions. Power-driven vessels shall be able to stop within half the visible distance. Sound fog signals every 2 minutes.'}}
+var RULES=[
+  {num:5,
+   title:{ar:'الرقابة والمراقبة',fr:'Veille',en:'Look-out'},
+   sub:{ar:'رقابة دائمة بجميع الوسائل المتاحة',fr:'Surveillance permanente par tous les moyens',en:'Constant watch by all available means'},
+   body:{ar:'يجب على كل سفينة في جميع الأوقات أن تحتفظ برقابة مناسبة بالبصر والسمع وبجميع الوسائل المتاحة الملائمة للظروف والأحوال السائدة، وذلك لتقدير خطر التصادم تقديراً كاملاً.',
+         fr:'Tout navire doit en permanence assurer une veille visuelle et auditive appropriée, en utilisant également tous les moyens disponibles adaptés aux circonstances, afin d\'apprécier pleinement la situation et le risque d\'abordage.',
+         en:'Every vessel shall at all times maintain a proper look-out by sight and hearing as well as by all available means appropriate to the prevailing circumstances to make a full appraisal of the situation and of the risk of collision.'}},
+  {num:8,
+   title:{ar:'إجراء تجنب التصادم',fr:'Manœuvre pour éviter l\'abordage',en:'Action to avoid collision'},
+   sub:{ar:'مناورات واسعة ومبكرة وواضحة',fr:'Manœuvres amples, précoces et visibles',en:'Early, bold, and clearly apparent action'},
+   body:{ar:'يجب أن تكون المناورات الرامية إلى تجنب التصادم واسعة النطاق وواضحة. لا يجوز اللجوء إلى سلسلة من التغييرات الصغيرة. يجب أن يكون تغيير المسار أو السرعة مبكراً وكافياً.',
+         fr:'Toute manœuvre pour éviter un abordage doit être suffisamment ample pour être clairement perçue. Il ne faut pas faire une succession de petites modifications. Tout changement de cap ou de vitesse doit être précoce et suffisant.',
+         en:'Any action to avoid collision shall be large enough to be readily apparent. Avoid a succession of small alterations. Any alteration of course or speed must be taken early and be substantial enough to be evident.'}},
+  {num:13,
+   title:{ar:'قاعدة اللحاق',fr:'Dépassement',en:'Overtaking rule'},
+   sub:{ar:'السفينة اللاحقة تتنازل دائماً',fr:'Le navire qui dépasse cède toujours',en:'Overtaking vessel always gives way'},
+   body:{ar:'السفينة التي تلحق بسفينة أخرى ملزمة دائماً بالابتعاد عن طريقها. تُعدّ السفينة لاحقة إذا اقتربت من اتجاه يزيد عن 22.5° خلف الجانب القائمة للسفينة المتقدمة من أي جانب.',
+         fr:'Un navire qui en dépasse un autre est toujours tenu de s\'écarter du navire dépassé. Est considéré comme dépassant tout navire qui s\'approche sous un angle supérieur à 22,5° en arrière du travers du navire dépassé.',
+         en:'Any vessel overtaking another shall keep clear of the vessel being overtaken. A vessel is deemed to be overtaking when approaching another from a direction more than 22.5° abaft the other vessel\'s beam.'}},
+  {num:14,
+   title:{ar:'الاتجاه المعاكس — وجهاً لوجه',fr:'Route opposée — face à face',en:'Head-on situation'},
+   sub:{ar:'كلاهما ينعطف يميناً — يسار يمر بيسار',fr:'Les deux virent à tribord — bâbord à bâbord',en:'Both alter to starboard — port to port'},
+   body:{ar:'عند تقابل سفينتين آليتين وجهاً لوجه مع خطر التصادم، يجب على كل منهما الانعطاف إلى اليمين (يمين السفينة) حتى تمرّا من جانب يسار كل منهما. هذه هي قاعدة "يسار يمر بيسار".',
+         fr:'Quand deux navires à propulsion mécanique font route en sens contraire avec risque d\'abordage, chacun doit virer à tribord afin de se croiser sur bâbord. C\'est la règle "bâbord à bâbord".',
+         en:'When two power-driven vessels are meeting on reciprocal or nearly reciprocal courses with risk of collision, each shall alter course to starboard so that each passes on the port side of the other. The "port-to-port" rule.'}},
+  {num:15,
+   title:{ar:'التقاطع — من يتنازل؟',fr:'Croisement — qui cède le passage?',en:'Crossing — who gives way?'},
+   sub:{ar:'من يرى الآخر على يمينه يتنازل',fr:'Navire ayant l\'autre à tribord cède',en:'Vessel with other to starboard gives way'},
+   body:{ar:'عند تقاطع مسارات سفينتين آليتين مع خطر التصادم: السفينة التي ترى الأخرى على جانبها الأيمن (يمين) يجب أن تتنازل وتُفسح المجال. السفينة الأخرى تستمر في مسارها وسرعتها.',
+         fr:'Quand deux navires se croisent avec risque d\'abordage: le navire qui a l\'autre sur son tribord doit céder le passage. L\'autre navire maintient son cap et sa vitesse.',
+         en:'When two power-driven vessels are crossing with risk of collision: the vessel which has the other on its starboard side shall give way. The other vessel shall maintain course and speed.'}},
+  {num:16,
+   title:{ar:'إجراء السفينة المتنازلة',fr:'Action du navire qui cède le passage',en:'Action by give-way vessel'},
+   sub:{ar:'تتحرك مبكراً وبشكل واضح وكافٍ',fr:'Agir tôt, franchement et suffisamment',en:'Act early, boldly, and leave ample room'},
+   body:{ar:'كل سفينة ملزمة بالتنازل يجب أن تتخذ إجراءً مبكراً وحاسماً للابتعاد بما يكفي عن طريق السفينة الأخرى. يجب تجنب العبور من أمام السفينة الأخرى إذا أمكن.',
+         fr:'Tout navire tenu de céder le passage doit prendre une manœuvre précoce et décisive pour s\'écarter suffisamment. Il doit éviter autant que possible de passer devant l\'autre navire.',
+         en:'Every vessel required to keep clear of another shall take early and substantial action to keep well clear. Shall avoid, if possible, crossing ahead of the other vessel.'}},
+  {num:17,
+   title:{ar:'إجراء السفينة ذات الحق',fr:'Action du navire privilégié',en:'Action by stand-on vessel'},
+   sub:{ar:'تحافظ على مسارها وسرعتها',fr:'Maintenir son cap et sa vitesse',en:'Maintain course and speed'},
+   body:{ar:'السفينة ذات الحق تحافظ على مسارها وسرعتها. يجوز لها اتخاذ إجراء حين يتبين أن السفينة الملزمة لا تتخذ الإجراء المناسب. لها في نهاية المطاف اتخاذ أفضل إجراء لتجنب التصادم.',
+         fr:'Le navire privilégié doit maintenir son cap et sa vitesse. Il peut manœuvrer dès qu\'il devient évident que l\'autre navire n\'agit pas. En dernier recours il peut prendre le meilleur parti pour éviter l\'abordage.',
+         en:'The stand-on vessel shall maintain course and speed. May take action when it becomes apparent the give-way vessel is not acting. May ultimately take whatever action will best avoid collision.'}},
+  {num:19,
+   title:{ar:'سلوك السفن في الرؤية المحدودة',fr:'Conduite en visibilité réduite',en:'Conduct in restricted visibility'},
+   sub:{ar:'الضباب: سرعة آمنة وإشارات صوتية',fr:'Brouillard: vitesse sûre, signaux sonores',en:'Fog: safe speed and sound signals'},
+   body:{ar:'في الظروف التي تقل فيها الرؤية (ضباب، مطر، ثلج) تسير كل سفينة بسرعة آمنة. على السفن الآلية أن تكون قادرة على الوقوف ضمن نصف مسافة الرؤية. تُصدر صافرة كل دقيقتين.',
+         fr:'En visibilité réduite (brouillard, pluie, neige) tout navire doit naviguer à vitesse de sécurité. Les navires à propulsion doivent pouvoir stopper en moitié de la distance visible. Émettre un son toutes les 2 minutes.',
+         en:'In restricted visibility (fog, rain, snow) every vessel shall proceed at a safe speed adapted to the conditions. Power-driven vessels shall be able to stop within half the visible distance. Sound one prolonged blast every 2 minutes.'}}
 ];
 
-const QUIZ=[
-  {q:{ar:'ما لون علامة الجانب الأيسر (Port Mark) في المنطقة A؟',fr:'Quelle couleur pour la bouée bâbord en Région A?',en:'What color is the port mark in IALA Region A?'},opts:[{ar:'أحمر',fr:'Rouge',en:'Red'},{ar:'أخضر',fr:'Vert',en:'Green'},{ar:'أصفر',fr:'Jaune',en:'Yellow'},{ar:'أبيض',fr:'Blanc',en:'White'}],ans:0,exp:{ar:'في المنطقة A علامة الجانب الأيسر حمراء. في المنطقة B تكون خضراء. قاعدة: "الأحمر على اليسار عند الدخول" في المنطقة A.',fr:'En Région A, la bouée bâbord est rouge. En Région B elle est verte. Règle: "rouge à bâbord à l\'entrée" en Région A.',en:'In Region A the port mark is red. In Region B it is green. Rule: "red-left-returning" in Region A.'}},
-  {q:{ar:'كرتان سوداوان في رأس العلامة تعني؟',fr:'Deux sphères noires en tête signifient?',en:'Two black spheres on a top mark mean?'},opts:[{ar:'علامة شرق كاردينالية',fr:'Cardinale est',en:'East cardinal mark'},{ar:'علامة مياه آمنة',fr:'Eau saine',en:'Safe water mark'},{ar:'علامة خطر معزول',fr:'Danger isolé',en:'Isolated danger mark'},{ar:'علامة شمال كاردينالية',fr:'Cardinale nord',en:'North cardinal mark'}],ans:2,exp:{ar:'كرتان سوداوان = علامة الخطر المعزول. تعني وجود خطر بمياه صالحة حوله. ضوؤها: Fl(2) أبيض.',fr:'Deux sphères noires = marque danger isolé. Eaux navigables tout autour. Feu: Fl(2) blanc.',en:'Two black spheres = isolated danger mark. Safe water all around. Light: Fl(2) white.'}},
-  {q:{ar:'عند تقابل سفينتين وجهاً لوجه، ماذا تفعلان؟',fr:'Deux navires face à face — que font-ils?',en:'Two vessels meeting head-on — what must each do?'},opts:[{ar:'تنعطف يساراً',fr:'Virer à bâbord',en:'Alter to port'},{ar:'تنعطف يميناً',fr:'Virer à tribord',en:'Alter to starboard'},{ar:'تتوقف وتنتظر',fr:'Stopper et attendre',en:'Stop and wait'},{ar:'تزيد السرعة',fr:'Accélérer',en:'Increase speed'}],ans:1,exp:{ar:'القاعدة 14: في حالة الاتجاه المعاكس كل سفينة تنعطف يميناً لتمر من جانب يسار الأخرى.',fr:'Règle 14: en face-à-face chaque navire vire à tribord pour se croiser bâbord à bâbord.',en:'Rule 14: head-on situation — each vessel alters to starboard to pass port-to-port.'}},
-  {q:{ar:'ما لون ضوء الجانب الأيمن (Starboard) للسفينة؟',fr:'Quelle couleur pour le feu de tribord?',en:'What color is the starboard navigation light?'},opts:[{ar:'أحمر 112.5°',fr:'Rouge 112,5°',en:'Red 112.5°'},{ar:'أبيض 225°',fr:'Blanc 225°',en:'White 225°'},{ar:'أخضر 112.5°',fr:'Vert 112,5°',en:'Green 112.5°'},{ar:'أصفر 360°',fr:'Jaune 360°',en:'Yellow 360°'}],ans:2,exp:{ar:'الجانب الأيمن أخضر 112.5°. الجانب الأيسر أحمر 112.5°. قاعدة سهلة: اليمين أخضر، اليسار أحمر.',fr:'Tribord = vert 112,5°. Bâbord = rouge 112,5°. Règle: vert à droite, rouge à gauche.',en:'Starboard = green 112.5°. Port = red 112.5°. Rule: green-right, red-left.'}},
-  {q:{ar:'في التقاطع، أي السفينتين تتنازل؟',fr:'En croisement, quel navire cède?',en:'In crossing, which vessel gives way?'},opts:[{ar:'الأكبر حجماً',fr:'Le plus grand',en:'The larger vessel'},{ar:'الأسرع',fr:'Le plus rapide',en:'The faster vessel'},{ar:'التي ترى الأخرى على يمينها',fr:'Qui a l\'autre à tribord',en:'The one with other to starboard'},{ar:'التي ترى الأخرى على يسارها',fr:'Qui a l\'autre à bâbord',en:'The one with other to port'}],ans:2,exp:{ar:'القاعدة 15: من يرى الآخر على يمينه يتنازل. من يرى الآخر على يساره يستمر في مساره.',fr:'Règle 15: celui qui a l\'autre à tribord cède. Celui qui a l\'autre à bâbord maintient sa route.',en:'Rule 15: vessel with other to starboard gives way. Vessel with other to port stands on.'}},
-  {q:{ar:'ما الضوء المستخدم عند إرساء السفينة ليلاً؟',fr:'Quel feu quand un navire est à l\'ancre?',en:'What light when a vessel is at anchor?'},opts:[{ar:'أحمر 360°',fr:'Rouge 360°',en:'Red 360°'},{ar:'أبيض 225°',fr:'Blanc 225°',en:'White 225°'},{ar:'أبيض 360°',fr:'Blanc 360°',en:'White 360°'},{ar:'أصفر 360°',fr:'Jaune 360°',en:'Yellow 360°'}],ans:2,exp:{ar:'سفينة راسية = ضوء أبيض 360° في المقدمة. للسفن فوق 50م يُضاف ضوء في المؤخرة.',fr:'Navire au mouillage = feu blanc 360° à l\'avant. Pour les navires >50m, ajouter un feu à la poupe.',en:'Vessel at anchor = white all-round 360° light at bow. Vessels >50m add an additional stern light.'}},
-  {q:{ar:'ما معنى علامة الشمال الكاردينالية؟',fr:'Que signifie la marque cardinale nord?',en:'What does a north cardinal mark mean?'},opts:[{ar:'خطر شمال العلامة',fr:'Danger au nord',en:'Danger to the north'},{ar:'مياه آمنة شمال العلامة',fr:'Eaux sûres au nord',en:'Safe water to the north'},{ar:'ميناء في الشمال',fr:'Port au nord',en:'Port to the north'},{ar:'توقف وانتظر',fr:'Arrêt obligatoire',en:'Stop and wait'}],ans:1,exp:{ar:'علامة الشمال الكاردينالية تعني أن المياه الآمنة تقع شمال العلامة — عبر من الشمال. جسمها أصفر/أسود مع مخروطين للأعلى.',fr:'La cardinale nord signifie: eaux sûres au nord — passer au nord. Corps jaune/noir, deux cônes pointes en haut.',en:'North cardinal means safe water lies to the north — pass to the north of the mark. Yellow/black body with two cones points up.'}},
-  {q:{ar:'علامة المياه الآمنة خطوطها رأسية. ما ألوانها؟',fr:'Quelles couleurs pour la bouée eau saine?',en:'What colors are on a safe water mark?'},opts:[{ar:'أحمر وأسود',fr:'Rouge et noir',en:'Red and black'},{ar:'أحمر وأبيض',fr:'Rouge et blanc',en:'Red and white'},{ar:'أصفر وأسود',fr:'Jaune et noir',en:'Yellow and black'},{ar:'أخضر وأبيض',fr:'Vert et blanc',en:'Green and white'}],ans:1,exp:{ar:'علامة المياه الآمنة خطوط رأسية حمراء وبيضاء وتعني مياه صالحة من جميع الاتجاهات. تستخدم لمنتصف القناة.',fr:'Rayures verticales rouge et blanc = eaux sûres de tous les côtés. Utilisée pour le milieu du chenal.',en:'Red and white vertical stripes = safe water on all sides. Used to mark mid-channel or landfall positions.'}}
+var QUIZ=[
+  {q:{ar:'ما لون علامة الجانب الأيسر (Port Mark) في المنطقة A من نظام IALA؟',
+      fr:'Quelle couleur pour la bouée bâbord en Région A du système IALA?',
+      en:'What color is the port lateral mark in IALA Region A?'},
+   opts:[{ar:'أحمر',fr:'Rouge',en:'Red'},{ar:'أخضر',fr:'Vert',en:'Green'},{ar:'أصفر',fr:'Jaune',en:'Yellow'},{ar:'أبيض',fr:'Blanc',en:'White'}],
+   ans:0,
+   exp:{ar:'في المنطقة A، علامة الجانب الأيسر حمراء. في المنطقة B تكون خضراء. قاعدة: "الأحمر على اليسار عند الدخول" في المنطقة A.',
+        fr:'En Région A la bouée bâbord est rouge. En Région B elle est verte. Règle: "rouge à bâbord à l\'entrée" en Région A.',
+        en:'In Region A the port mark is red. In Region B it is green. Rule: "red-left-returning" applies in Region A.'}},
+  {q:{ar:'ما الذي تعنيه كرتان سوداوان في رأس العلامة البحرية؟',
+      fr:'Que signifient deux sphères noires en tête d\'une marque maritime?',
+      en:'What do two black spheres as a top mark indicate?'},
+   opts:[{ar:'علامة شرق كاردينالية',fr:'Cardinale est',en:'East cardinal mark'},{ar:'علامة مياه آمنة',fr:'Eau saine',en:'Safe water mark'},{ar:'علامة خطر معزول',fr:'Danger isolé',en:'Isolated danger mark'},{ar:'علامة شمال كاردينالية',fr:'Cardinale nord',en:'North cardinal mark'}],
+   ans:2,
+   exp:{ar:'كرتان سوداوان = علامة الخطر المعزول. تعني وجود خطر بمياه صالحة حوله من جميع الجهات. ضوؤها: Fl(2) أبيض.',
+        fr:'Deux sphères noires = marque danger isolé. Eaux navigables tout autour. Feu: Fl(2) blanc.',
+        en:'Two black spheres = isolated danger mark. Safe water on all sides around the hazard. Light: Fl(2) white.'}},
+  {q:{ar:'عند تقابل سفينتين وجهاً لوجه مع خطر التصادم، ماذا يجب على كل منهما؟',
+      fr:'Deux navires face à face avec risque d\'abordage — que doivent-ils faire?',
+      en:'Two vessels meeting head-on with risk of collision — what must each do?'},
+   opts:[{ar:'تنعطف يساراً',fr:'Virer à bâbord',en:'Alter course to port'},{ar:'تنعطف يميناً',fr:'Virer à tribord',en:'Alter course to starboard'},{ar:'تتوقف وتنتظر',fr:'Stopper et attendre',en:'Stop and wait'},{ar:'تزيد السرعة',fr:'Accélérer',en:'Increase speed'}],
+   ans:1,
+   exp:{ar:'القاعدة 14: في حالة الاتجاه المعاكس كل سفينة تنعطف يميناً لتمر يسارها بيسار الأخرى.',
+        fr:'Règle 14: en face-à-face chaque navire vire à tribord pour se croiser bâbord à bâbord.',
+        en:'Rule 14: in a head-on situation each vessel alters to starboard to pass port-to-port.'}},
+  {q:{ar:'ما لون وزاوية ضوء الجانب الأيمن (Starboard) للسفينة؟',
+      fr:'Quelle couleur et quel angle pour le feu de tribord?',
+      en:'What color and arc is the starboard navigation light?'},
+   opts:[{ar:'أحمر — 112.5°',fr:'Rouge — 112,5°',en:'Red — 112.5°'},{ar:'أبيض — 225°',fr:'Blanc — 225°',en:'White — 225°'},{ar:'أخضر — 112.5°',fr:'Vert — 112,5°',en:'Green — 112.5°'},{ar:'أصفر — 360°',fr:'Jaune — 360°',en:'Yellow — 360°'}],
+   ans:2,
+   exp:{ar:'الجانب الأيمن أخضر 112.5°. الجانب الأيسر أحمر 112.5°. قاعدة: "اليمين أخضر، اليسار أحمر".',
+        fr:'Tribord = vert 112,5°. Bâbord = rouge 112,5°. Règle: "vert à droite, rouge à gauche".',
+        en:'Starboard = green 112.5°. Port = red 112.5°. Rule: "green-right, red-left".'}},
+  {q:{ar:'في حالة التقاطع بين سفينتين، أي منهما يتنازل وتُفسح الطريق؟',
+      fr:'En croisement, quel navire doit céder le passage?',
+      en:'In a crossing situation, which vessel must give way?'},
+   opts:[{ar:'الأكبر حجماً',fr:'Le plus grand',en:'The larger vessel'},{ar:'الأسرع سرعة',fr:'Le plus rapide',en:'The faster vessel'},{ar:'التي ترى الأخرى على يمينها',fr:'Celle qui voit l\'autre à tribord',en:'The one with other on its starboard'},{ar:'التي ترى الأخرى على يسارها',fr:'Celle qui voit l\'autre à bâbord',en:'The one with other on its port'}],
+   ans:2,
+   exp:{ar:'القاعدة 15: من يرى الآخر على يمينه يتنازل. من يرى الآخر على يساره يستمر في مساره.',
+        fr:'Règle 15: celui qui a l\'autre à tribord cède. Celui qui a l\'autre à bâbord maintient sa route.',
+        en:'Rule 15: vessel with other to starboard gives way. Vessel with other to port stands on.'}},
+  {q:{ar:'ما الضوء المستخدم عند إرساء السفينة ليلاً؟',
+      fr:'Quel feu utilise-t-on quand un navire est à l\'ancre la nuit?',
+      en:'What light is used when a vessel is at anchor at night?'},
+   opts:[{ar:'أحمر 360°',fr:'Rouge 360°',en:'Red 360°'},{ar:'أبيض 225°',fr:'Blanc 225°',en:'White 225°'},{ar:'أبيض 360°',fr:'Blanc 360°',en:'White 360°'},{ar:'أصفر 360°',fr:'Jaune 360°',en:'Yellow 360°'}],
+   ans:2,
+   exp:{ar:'سفينة راسية = ضوء أبيض 360° في المقدمة. للسفن فوق 50م يُضاف ضوء خلفي أسفل من الأمامي.',
+        fr:'Navire au mouillage = feu blanc 360° à l\'avant. Navires >50m ajoutent un feu plus bas à la poupe.',
+        en:'Vessel at anchor = all-round white 360° light at the bow. Vessels >50m add a second lower all-round light aft.'}},
+  {q:{ar:'ما معنى علامة الشمال الكاردينالية؟',
+      fr:'Que signifie la marque cardinale nord?',
+      en:'What does the north cardinal mark indicate?'},
+   opts:[{ar:'هناك خطر شمال العلامة',fr:'Danger au nord de la marque',en:'Danger to the north of the mark'},{ar:'المياه الآمنة شمال العلامة',fr:'Eaux sûres au nord',en:'Safe water to the north'},{ar:'ميناء في الشمال',fr:'Port au nord',en:'Harbor to the north'},{ar:'توقف ممنوع المرور',fr:'Passage interdit',en:'No passage zone'}],
+   ans:1,
+   exp:{ar:'علامة الشمال تعني: المياه الآمنة تقع شمالها — عبر من الشمال. جسمها أصفر/أسود ومخروطان رأساً للأعلى.',
+        fr:'Cardinale nord = eaux sûres au nord — passer au nord. Corps jaune/noir, deux cônes pointes en haut.',
+        en:'North cardinal = safe water to the north — pass to the north. Body yellow over black, two cones points up.'}},
+  {q:{ar:'ما ألوان علامة المياه الآمنة (Safe Water Mark)؟',
+      fr:'Quelles sont les couleurs de la bouée eau saine?',
+      en:'What colors does a safe water mark display?'},
+   opts:[{ar:'أحمر وأسود',fr:'Rouge et noir',en:'Red and black'},{ar:'أحمر وأبيض (رأسياً)',fr:'Rouge et blanc (vertical)',en:'Red and white (vertical stripes)'},{ar:'أصفر وأسود',fr:'Jaune et noir',en:'Yellow and black'},{ar:'أخضر وأبيض',fr:'Vert et blanc',en:'Green and white'}],
+   ans:1,
+   exp:{ar:'علامة المياه الآمنة = خطوط رأسية حمراء وبيضاء. تعني مياه صالحة من جميع الاتجاهات. تستخدم لمنتصف القناة.',
+        fr:'Eau saine = rayures verticales rouge et blanc. Eaux sûres de tous côtés. Utilisée pour le milieu du chenal.',
+        en:'Safe water mark = red and white vertical stripes. Safe water on all sides. Used for mid-channel and landfall.'}}
 ];
 
-let lang='ar',mod='iala',selB=null,selL=null,selR=null,qIdx=0,qScore=0,qAns=false,qDone=false;
-
-function setLang(l){
-  lang=l;
-  document.querySelectorAll('.lang-btn').forEach((b,i)=>b.classList.toggle('active',['ar','fr','en'][i]===l));
-  document.getElementById('hdesc').textContent=L[l].desc;
-  ['mn0','mn1','mn2','mn3'].forEach((id,i)=>document.getElementById(id).textContent=L[l].mn[i]);
-  document.getElementById('app').dir=l==='ar'?'rtl':'ltr';
-  render();
-}
-
-function setMod(m){
-  mod=m;selB=null;selL=null;selR=null;qIdx=0;qScore=0;qAns=false;qDone=false;
-  document.querySelectorAll('.mod-btn').forEach((b,i)=>b.classList.toggle('active',['iala','lights','colreg','quiz'][i]===m));
-  render();
-}
+var lang='ar', mod='iala', selB=null, selL=null, selR=null;
+var qIdx=0, qScore=0, qAns=false, qDone=false;
 
 function bSVG(b){
-  const c=b.col;
-  if(b.id==='port') return `<svg width="40" height="56" viewBox="0 0 40 56"><rect x="12" y="6" width="16" height="32" rx="8" fill="${c}"/><rect x="12" y="38" width="16" height="5" rx="2" fill="${c}"/><rect x="18" y="1" width="4" height="8" fill="#aaa"/></svg>`;
-  if(b.id==='stbd') return `<svg width="40" height="56" viewBox="0 0 40 56"><polygon points="20,6 34,42 6,42" fill="${c}"/><rect x="18" y="1" width="4" height="8" fill="#aaa"/></svg>`;
-  if(b.id==='north') return `<svg width="40" height="56" viewBox="0 0 40 56"><rect x="12" y="14" width="16" height="28" rx="3" fill="#FFD166"/><rect x="12" y="14" width="16" height="10" fill="#0A1628"/><polygon points="14,2 20,14 26,2" fill="#0A1628"/><polygon points="14,13 20,1 26,13" fill="#0A1628"/></svg>`;
-  if(b.id==='south') return `<svg width="40" height="56" viewBox="0 0 40 56"><rect x="12" y="12" width="16" height="28" rx="3" fill="#FFD166"/><rect x="12" y="30" width="16" height="10" fill="#0A1628"/><polygon points="14,44 20,56 26,44" fill="#0A1628"/><polygon points="14,54 20,42 26,54" fill="#0A1628"/></svg>`;
-  if(b.id==='east') return `<svg width="40" height="56" viewBox="0 0 40 56"><rect x="12" y="12" width="16" height="28" rx="3" fill="#FFD166"/><rect x="12" y="22" width="16" height="8" fill="#0A1628"/><polygon points="14,1 20,12 26,1" fill="#0A1628"/><polygon points="14,54 20,43 26,54" fill="#0A1628"/></svg>`;
-  if(b.id==='west') return `<svg width="40" height="56" viewBox="0 0 40 56"><rect x="12" y="12" width="16" height="28" rx="3" fill="#0A1628"/><rect x="12" y="12" width="16" height="9" fill="#FFD166"/><rect x="12" y="31" width="16" height="9" fill="#FFD166"/><polygon points="14,0 26,7 14,7" fill="#FFD166"/><polygon points="14,54 26,47 14,47" fill="#FFD166"/></svg>`;
-  if(b.id==='danger') return `<svg width="40" height="56" viewBox="0 0 40 56"><rect x="12" y="14" width="16" height="28" rx="3" fill="#E8001D"/><rect x="12" y="22" width="16" height="8" fill="#0A1628"/><circle cx="15" cy="7" r="5" fill="#0A1628"/><circle cx="25" cy="7" r="5" fill="#0A1628"/></svg>`;
-  if(b.id==='safe') return `<svg width="40" height="56" viewBox="0 0 40 56"><rect x="10" y="12" width="20" height="30" rx="10" fill="#fff"/><rect x="10" y="12" width="4" height="30" fill="#E8001D" rx="3"/><rect x="18" y="12" width="4" height="30" fill="#E8001D"/><circle cx="20" cy="7" r="5" fill="#E8001D"/></svg>`;
-  if(b.id==='special') return `<svg width="40" height="56" viewBox="0 0 40 56"><ellipse cx="20" cy="32" rx="11" ry="16" fill="#F5C518"/><text x="20" y="10" text-anchor="middle" font-size="14" fill="#F5C518" font-weight="bold">✕</text></svg>`;
+  var c=b.col;
+  if(b.id==='port') return '<svg width="44" height="60" viewBox="0 0 44 60"><rect x="18" y="2" width="5" height="12" fill="#8BB8D8"/><rect x="13" y="12" width="18" height="34" rx="9" fill="'+c+'"/><rect x="13" y="46" width="18" height="6" rx="2" fill="'+c+'"/></svg>';
+  if(b.id==='stbd') return '<svg width="44" height="60" viewBox="0 0 44 60"><rect x="18" y="2" width="5" height="10" fill="#8BB8D8"/><polygon points="22,12 36,48 8,48" fill="'+c+'"/></svg>';
+  if(b.id==='north') return '<svg width="44" height="60" viewBox="0 0 44 60"><rect x="13" y="18" width="18" height="28" rx="3" fill="#FFD166"/><rect x="13" y="18" width="18" height="11" fill="#0A1628"/><polygon points="14,2 22,16 30,2" fill="#0A1628"/><polygon points="14,15 22,1 30,15" fill="#0A1628"/></svg>';
+  if(b.id==='south') return '<svg width="44" height="60" viewBox="0 0 44 60"><rect x="13" y="14" width="18" height="28" rx="3" fill="#FFD166"/><rect x="13" y="32" width="18" height="10" fill="#0A1628"/><polygon points="14,46 22,60 30,46" fill="#0A1628"/><polygon points="14,57 22,43 30,57" fill="#0A1628"/></svg>';
+  if(b.id==='east') return '<svg width="44" height="60" viewBox="0 0 44 60"><rect x="13" y="14" width="18" height="28" rx="3" fill="#FFD166"/><rect x="13" y="24" width="18" height="8" fill="#0A1628"/><polygon points="14,2 22,14 30,2" fill="#0A1628"/><polygon points="14,56 22,44 30,56" fill="#0A1628"/></svg>';
+  if(b.id==='west') return '<svg width="44" height="60" viewBox="0 0 44 60"><rect x="13" y="14" width="18" height="28" rx="3" fill="#0A1628"/><rect x="13" y="14" width="18" height="9" fill="#FFD166"/><rect x="13" y="33" width="18" height="9" fill="#FFD166"/><polygon points="14,2 30,9 14,9" fill="#FFD166" transform="rotate(180,22,6)"/><polygon points="14,56 30,49 14,49" fill="#FFD166"/></svg>';
+  if(b.id==='danger') return '<svg width="44" height="60" viewBox="0 0 44 60"><rect x="13" y="16" width="18" height="28" rx="3" fill="#E8001D"/><rect x="13" y="25" width="18" height="9" fill="#0A1628"/><circle cx="15" cy="9" r="6" fill="#0A1628"/><circle cx="27" cy="9" r="6" fill="#0A1628"/></svg>';
+  if(b.id==='safe') return '<svg width="44" height="60" viewBox="0 0 44 60"><rect x="11" y="14" width="22" height="32" rx="11" fill="#fff"/><rect x="11" y="14" width="5" height="32" fill="#E8001D" rx="3"/><rect x="20" y="14" width="5" height="32" fill="#E8001D"/><circle cx="22" cy="9" r="6" fill="#E8001D"/></svg>';
+  if(b.id==='special') return '<svg width="44" height="60" viewBox="0 0 44 60"><ellipse cx="22" cy="36" rx="12" ry="18" fill="#F5C518"/><text x="22" y="10" text-anchor="middle" font-size="16" fill="#F5C518" font-weight="bold">✕</text></svg>';
   return '';
 }
 
 function lSVG(l){
-  const cx=35,cy=35,r=28;
-  if(l.arc>=360) return `<svg width="70" height="70" viewBox="0 0 70 70"><circle cx="${cx}" cy="${cy}" r="${r}" fill="${l.col}" opacity="0.22"/><circle cx="${cx}" cy="${cy}" r="8" fill="${l.col}"/></svg>`;
-  const toR=d=>(d-90)*Math.PI/180;
-  const x1=cx+r*Math.cos(toR(l.aS)),y1=cy+r*Math.sin(toR(l.aS));
-  const x2=cx+r*Math.cos(toR(l.aS+l.arc)),y2=cy+r*Math.sin(toR(l.aS+l.arc));
-  const lg=l.arc>180?1:0;
-  return `<svg width="70" height="70" viewBox="0 0 70 70"><path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${lg},1 ${x2},${y2} Z" fill="${l.col}" opacity="0.25"/><circle cx="${cx}" cy="${cy}" r="7" fill="${l.col}"/></svg>`;
+  var cx=38,cy=38,r=30;
+  if(l.arc>=360) return '<svg width="76" height="76" viewBox="0 0 76 76"><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="'+l.col+'" opacity="0.2"/><circle cx="'+cx+'" cy="'+cy+'" r="9" fill="'+l.col+'"/></svg>';
+  var toR=function(d){return (d-90)*Math.PI/180;};
+  var x1=cx+r*Math.cos(toR(l.aS)), y1=cy+r*Math.sin(toR(l.aS));
+  var x2=cx+r*Math.cos(toR(l.aS+l.arc)), y2=cy+r*Math.sin(toR(l.aS+l.arc));
+  var lg=l.arc>180?1:0;
+  return '<svg width="76" height="76" viewBox="0 0 76 76"><path d="M'+cx+','+cy+' L'+x1+','+y1+' A'+r+','+r+' 0 '+lg+',1 '+x2+','+y2+' Z" fill="'+l.col+'" opacity="0.22"/><circle cx="'+cx+'" cy="'+cy+'" r="8" fill="'+l.col+'"/></svg>';
 }
 
 function render(){
-  const c=document.getElementById('cnt');
-  const t=L[lang];
+  var c=document.getElementById('cnt');
+  var t=T[lang];
   if(mod==='iala'){
-    const cards=BUOYS.map(b=>`<div class="buoy-card${selB===b.id?' sel':''}" onclick="sb('${b.id}')">${bSVG(b)}<div class="buoy-name" style="color:${b.col==='#fff'?'#ccc':b.col}">${b.names[lang]}</div><div class="buoy-tap">${t.tap}</div></div>`).join('');
-    let det='';
+    var cards=BUOYS.map(function(b){
+      return '<div class="bc'+(selB===b.id?' on':'')+'" onclick="sb(\''+b.id+'\')">'
+        +bSVG(b)
+        +'<div class="bname" style="color:'+(b.col==='#FFFFFF'?'#ccc':b.col)+'">'+b.names[lang]+'</div>'
+        +'<div class="btap">'+t.tap+'</div></div>';
+    }).join('');
+    var det='';
     if(selB){
-      const b=BUOYS.find(x=>x.id===selB);
-      det=`<div class="detail-box"><div class="detail-title" style="color:${b.col==='#fff'?'#ccc':b.col}">${b.names[lang]}</div>
-        <div class="detail-row"><div class="d-label">${t.top}</div><div class="d-val">${b.top[lang]}</div></div>
-        <div class="detail-row"><div class="d-label">${t.lgt}</div><div class="d-val">${b.lgt[lang]}</div></div>
-        <div class="detail-row"><div class="d-label">${t.mA}</div><div class="d-val">${b.mA[lang]}</div></div>
-        <div class="detail-row"><div class="d-label">${t.mB}</div><div class="d-val">${b.mB[lang]}</div></div>
-        <div class="detail-row"><div class="d-label">${t.use}</div><div class="d-val">${b.use[lang]}</div></div>
-      </div>`;
+      var b=BUOYS.find(function(x){return x.id===selB;});
+      det='<div class="detbox"><div class="dtitle" style="color:'+(b.col==='#FFFFFF'?'#ccc':b.col)+'">'+b.names[lang]+'</div>'
+        +'<div class="drow"><div class="dlabel">'+t.top+'</div><div class="dval">'+b.top[lang]+'</div></div>'
+        +'<div class="drow"><div class="dlabel">'+t.lgt+'</div><div class="dval">'+b.lgt[lang]+'</div></div>'
+        +'<div class="drow"><div class="dlabel">'+t.mA+'</div><div class="dval">'+b.mA[lang]+'</div></div>'
+        +'<div class="drow"><div class="dlabel">'+t.mB+'</div><div class="dval">'+b.mB[lang]+'</div></div>'
+        +'<div class="drow"><div class="dlabel">'+t.use+'</div><div class="dval">'+b.use[lang]+'</div></div></div>';
     }
-    c.innerHTML=`<div class="sec-title">${t.iT}</div><div class="intro-box">${t.iI}</div><div class="buoy-grid">${cards}</div>${det}`;
+    c.innerHTML='<div class="stitle">'+t.iT+'</div><div class="infobox">'+t.iI+'</div><div class="bgrid">'+cards+'</div>'+det;
   } else if(mod==='lights'){
-    const cards=LIGHTS.map(l=>`<div class="light-card${selL===l.id?' sel':''}" onclick="sl('${l.id}')">
-      ${lSVG(l)}
-      <div><div class="light-name">${l.names[lang]}</div><div class="light-desc">${l.desc[lang]}</div>${selL===l.id?`<div class="light-detail">${l.detail[lang]}</div>`:''}</div>
-    </div>`).join('');
-    c.innerHTML=`<div class="sec-title">${t.lT}</div><div class="intro-box">${t.lI}</div><div class="lights-list">${cards}</div>`;
+    var cards=LIGHTS.map(function(l){
+      return '<div class="lc'+(selL===l.id?' on':'')+'" onclick="sl(\''+l.id+'\')">'
+        +lSVG(l)
+        +'<div><div class="lname">'+l.names[lang]+'</div><div class="ldesc">'+l.desc[lang]+'</div>'
+        +(selL===l.id?'<div class="ldetail">'+l.detail[lang]+'</div>':'')
+        +'</div></div>';
+    }).join('');
+    c.innerHTML='<div class="stitle">'+t.lT+'</div><div class="infobox">'+t.lI+'</div><div class="llist">'+cards+'</div>';
   } else if(mod==='colreg'){
-    const cards=RULES.map(r=>`<div class="rule-card${selR===r.num?' sel':''}" onclick="sr(${r.num})">
-      <div class="rule-header"><div class="rule-num">${r.num}</div><div><div class="rule-title">${r.title[lang]}</div><div class="rule-sub">${r.sub[lang]}</div></div></div>
-      ${selR===r.num?`<div class="rule-body">${r.body[lang]}</div>`:''}
-    </div>`).join('');
-    c.innerHTML=`<div class="sec-title">${t.cT}</div><div class="intro-box">${t.cI}</div><div class="rules-list">${cards}</div>`;
+    var cards=RULES.map(function(r){
+      return '<div class="rc'+(selR===r.num?' on':'')+'" onclick="sr('+r.num+')">'
+        +'<div class="rheader"><div class="rnum">'+r.num+'</div>'
+        +'<div><div class="rtitle">'+r.title[lang]+'</div><div class="rsub">'+r.sub[lang]+'</div></div></div>'
+        +(selR===r.num?'<div class="rbody">'+r.body[lang]+'</div>':'')
+        +'</div>';
+    }).join('');
+    c.innerHTML='<div class="stitle">'+t.cT+'</div><div class="infobox">'+t.cI+'</div><div class="rlist">'+cards+'</div>';
   } else {
     if(qDone){
-      const pct=Math.round(qScore/QUIZ.length*100);
-      const stars=pct>=80?'★★★':pct>=60?'★★☆':'★☆☆';
-      c.innerHTML=`<div class="sec-title">${t.qT}</div><div class="finish-screen"><div class="finish-stars">${stars}</div><div class="finish-score">${qScore}/${QUIZ.length}</div><div class="finish-pct">${t.scr}: ${pct}%</div><button class="restart-btn" onclick="restart()">${t.rst}</button></div>`;
+      var pct=Math.round(qScore/QUIZ.length*100);
+      var stars=pct>=80?'★★★':pct>=60?'★★☆':'★☆☆';
+      c.innerHTML='<div class="stitle">'+t.qT+'</div><div class="finish">'
+        +'<div class="fstars">'+stars+'</div>'
+        +'<div class="fscore">'+qScore+'/'+QUIZ.length+'</div>'
+        +'<div class="fpct">'+t.scr+': '+pct+'%</div>'
+        +'<button class="rbtn" onclick="restart()">'+t.rst+'</button></div>';
       return;
     }
-    const q=QUIZ[qIdx];
-    const opts=q.opts.map((o,i)=>`<button class="qopt" data-i="${i}" onclick="ans(${i})">${o[lang]}</button>`).join('');
-    c.innerHTML=`<div class="sec-title">${t.qT}</div>
-    <div class="quiz-box">
-      <div class="quiz-q">${qIdx+1}. ${q.q[lang]}</div>
-      <div class="quiz-opts" id="qopts">${opts}</div>
-      <div class="quiz-fb" id="qfb"></div>
-      <div class="quiz-foot">
-        <span class="quiz-prog">${qIdx+1} / ${QUIZ.length} &nbsp; <span class="score-pill">${t.scr}: ${qScore}</span></span>
-        <span id="qnav"></span>
-      </div>
-    </div>`;
+    var q=QUIZ[qIdx];
+    var opts=q.opts.map(function(o,i){
+      return '<button class="qo" data-i="'+i+'" onclick="ans('+i+')">'+o[lang]+'</button>';
+    }).join('');
+    c.innerHTML='<div class="stitle">'+t.qT+'</div><div class="infobox" style="font-size:13px">'+t.qI+'</div>'
+      +'<div class="qbox">'
+      +'<div class="qq">'+(qIdx+1)+'. '+q.q[lang]+'</div>'
+      +'<div class="qopts" id="qopts">'+opts+'</div>'
+      +'<div class="qfb" id="qfb"></div>'
+      +'<div class="qfoot">'
+      +'<span class="qprog">'+(qIdx+1)+' / '+QUIZ.length+' &nbsp;<span class="spill">'+t.scr+': '+qScore+'</span></span>'
+      +'<span id="qnav"></span>'
+      +'</div></div>';
   }
 }
 
-function sb(id){selB=selB===id?null:id;render();}
-function sl(id){selL=selL===id?null:id;render();}
-function sr(n){selR=selR===n?null:n;render();}
+function sb(id){selB=(selB===id?null:id);render();}
+function sl(id){selL=(selL===id?null:id);render();}
+function sr(n){selR=(selR===n?null:n);render();}
 
 function ans(i){
   if(qAns) return;
   qAns=true;
-  const q=QUIZ[qIdx];
+  var q=QUIZ[qIdx];
   if(i===q.ans) qScore++;
-  document.querySelectorAll('.qopt').forEach((b,idx)=>{
-    b.style.pointerEvents='none';
-    if(idx===q.ans) b.classList.add('ok');
-    else if(idx===i && i!==q.ans) b.classList.add('fail');
-  });
-  const fb=document.getElementById('qfb');
+  var btns=document.querySelectorAll('.qo');
+  for(var k=0;k<btns.length;k++){
+    btns[k].style.pointerEvents='none';
+    if(k===q.ans) btns[k].classList.add('ok');
+    else if(k===i && i!==q.ans) btns[k].classList.add('fail');
+  }
+  var fb=document.getElementById('qfb');
   fb.textContent=q.exp[lang];
-  fb.className='quiz-fb show '+(i===q.ans?'ok':'fail');
-  const t=L[lang];
-  document.getElementById('qnav').innerHTML=`<button class="next-btn" onclick="nxt()">${qIdx<QUIZ.length-1?t.nxt:t.fin}</button>`;
+  fb.className='qfb show '+(i===q.ans?'ok':'fail');
+  var t=T[lang];
+  document.getElementById('qnav').innerHTML='<button class="nbtn" onclick="nxt()">'+(qIdx<QUIZ.length-1?t.nxt:t.fin)+'</button>';
 }
 
 function nxt(){
@@ -257,6 +487,28 @@ function nxt(){
 
 function restart(){qIdx=0;qScore=0;qAns=false;qDone=false;render();}
 
-document.getElementById('app').dir='rtl';
+function setL(l){
+  lang=l;
+  var lbs=document.querySelectorAll('.lb');
+  var ls=['ar','fr','en'];
+  for(var i=0;i<lbs.length;i++) lbs[i].classList.toggle('on',ls[i]===l);
+  document.getElementById('hsub').textContent=T[l].sub;
+  var mns=['mn0','mn1','mn2','mn3'];
+  for(var i=0;i<mns.length;i++) document.getElementById(mns[i]).textContent=T[l].mn[i];
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.documentElement.lang=l;
+  render();
+}
+
+function setM(m){
+  mod=m;selB=null;selL=null;selR=null;qIdx=0;qScore=0;qAns=false;qDone=false;
+  var mbs=document.querySelectorAll('.mb');
+  var ms=['iala','lights','colreg','quiz'];
+  for(var i=0;i<mbs.length;i++) mbs[i].classList.toggle('on',ms[i]===m);
+  render();
+}
+
 render();
 </script>
+</body>
+</html>
