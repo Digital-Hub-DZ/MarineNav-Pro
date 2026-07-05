@@ -510,5 +510,32 @@ function setM(m){
 
 render();
 </script>
+
+<!-- DISCLAIMER -->
+<div style="margin:0 16px 32px;background:rgba(240,165,0,0.07);border:1.5px solid rgba(240,165,0,0.35);border-radius:14px;padding:16px 15px;display:flex;gap:12px;align-items:flex-start">
+  <div style="font-size:22px;flex-shrink:0;margin-top:1px">⚠️</div>
+  <div>
+    <div id="disc-title" style="font-size:14px;font-weight:700;color:#F0A500;margin-bottom:6px">إخلاء مسؤولية</div>
+    <div id="disc-body" style="font-size:13px;color:rgba(248,250,255,0.75);line-height:1.7">
+      هذه الأداة مخصصة للأغراض التعليمية فقط. المحتوى المعروض هو تبسيط توضيحي لأنظمة الملاحة البحرية ولا يُغني عن المراجع الرسمية المعتمدة. للاستخدام الفعلي في الملاحة البحرية، يجب الرجوع دائماً إلى النصوص الرسمية لـ IALA وCOLREGs والمنظمة البحرية الدولية (IMO).
+    </div>
+  </div>
+</div>
+
+<script>
+var discTitles={ar:'إخلاء مسؤولية',fr:'Avertissement',en:'Disclaimer'};
+var discBodies={
+  ar:'هذه الأداة مخصصة للأغراض التعليمية فقط. المحتوى المعروض هو تبسيط توضيحي لأنظمة الملاحة البحرية ولا يُغني عن المراجع الرسمية المعتمدة. للاستخدام الفعلي في الملاحة البحرية، يجب الرجوع دائماً إلى النصوص الرسمية لـ IALA وCOLREGs والمنظمة البحرية الدولية (IMO).',
+  fr:"Cet outil est destiné à des fins éducatives uniquement. Le contenu présenté est une simplification illustrative des systèmes de navigation maritime et ne remplace pas les références officielles. Pour une utilisation réelle en navigation, consultez toujours les textes officiels de l'IALA, des COLREG et de l'Organisation Maritime Internationale (OMI).",
+  en:'This tool is intended for educational purposes only. The content presented is an illustrative simplification of maritime navigation systems and does not replace official references. For actual use in maritime navigation, always refer to the official texts of IALA, COLREGs, and the International Maritime Organization (IMO).'
+};
+var _origSetL=setL;
+setL=function(l){
+  _origSetL(l);
+  document.getElementById('disc-title').textContent=discTitles[l];
+  document.getElementById('disc-body').textContent=discBodies[l];
+};
+</script>
+
 </body>
 </html>
